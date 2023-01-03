@@ -1,0 +1,13 @@
+/* .box{
+    min-height: 350px;
+    text-align: center;
+} */
+
+thead th {
+    background-color: #b19665;
+}
+
+button.green,
+button.red {
+    border-radius: 5px;
+}

@@ -1,0 +1,110 @@
+<div class="container m-container pb-5">
+    <div class="detail-body">
+        <div *ngFor="let v of vehicle_list" class="vehicle-box">
+            <div [class.active]="v.isSelected" (click)="vehicle(v.id)" class="vehicle">
+                <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.ImageUrl(v.id)" width="80" height="100">
+                <p><b>{{v.title}}</b></p>
+            </div>
+        </div>
+    </div>
+    <button [disabled]="nextBtn" (click)="openModalBank(Templete)" class="home-btn" [ngClass]="{'disabled':nextBtn}">Next</button>
+</div>
+<ng-template #Templete>
+    <div class="modal-header modal-head">
+        <h4 class="modal-title pull-left">Registration</h4>
+        <img src="/assets/img/logo.jpg" alt="">
+        <i (click)="cancelButton(f)" class="fas fa-times"></i>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="lenderForm" (ngSubmit)="save(f)" #f="ngForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input formControlName="email" class="form-control" placeholder="Enter Email" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.email, f)" class="errors">
+                            <p *ngIf="g.email.errors.required">Email is required</p>
+                            <p *ngIf="g.email.errors.email">Please enter valid email</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        <input type="password" formControlName="password" class="form-control" placeholder="Enter password" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.password, f)" class="errors">
+                            <p *ngIf="g.password.errors.required">Password is required</p>
+                            <p *ngIf="g.password.errors.minLength">Minimum 8 char</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        <input type="password" formControlName="password_confirmation" class="form-control" placeholder="Re enter password" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.password_confirmation, f)" class="errors">
+                            <p *ngIf="g.password_confirmation.errors.required">Password is required</p>
+                            <p *ngIf="g.password_confirmation.errors.minLength">Please enter valid email</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-12">
+                    <input style="margin-right: 10px;" type="radio" id="mr" formControlName="gender" value="male"><label for="mr"> Mr.</label>
+                    <input style="margin-left: 20px;margin-right: 10px;" id="mrs" type="radio" formControlName="gender" value="female"><label for="mrs"> Mrs.</label>
+                    <div *ngIf="ui.checkErrors(g.gender, f)" class="errors">
+                        <p *ngIf="g.gender.errors.required">title is required</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input formControlName="first_name" class="form-control" placeholder="First Name" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.first_name , f)" class="errors">
+                            <p *ngIf="g.first_name.errors.required"> First Name is required</p>
+                            <p *ngIf="g.first_name.errors.maxlength">First name should not exceed 50 characters}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input formControlName="last_name" class="form-control" placeholder="Sir Name" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.last_name , f)" class="errors">
+                            <p *ngIf="g.last_name.errors.required">Sir Name is required</p>
+                            <p *ngIf="g.last_name.errors.maxlength">Sir Name should not exceed 50 characters}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="text" formControlName="contact" class="form-control" placeholder="Enter Contact" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.contact, f)" class="errors">
+                            <p *ngIf="g.contact.errors.required">Primary Contact is required</p>
+                            <p *ngIf="g.contact.errors.maxlength">Maximum 15 digits </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Birthday </label>
+                        <input type="text" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY',adaptivePosition: true }" formControlName="dob" placeholder="Enter Date of Birth" [ngClass]="{'form-submitted': f.submitted}" />
+                        <div *ngIf="ui.checkErrors(g.dob, f)" class="errors">
+                            <p *ngIf="g.dob.errors.required">Date of Birth required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="checkbox" formControlName="agree" id="agree" value="agree">
+                    <label for="agree">
+                        <div style="font-size: 13px;">By Continuing, I accept the terms and conditions.</div>
+                    </label>
+                    <div *ngIf="ui.checkErrors(g.agree, f)" class="errors">
+                        <p *ngIf="g.agree.errors.required">Must Agree to continue</p>
+                    </div>
+                </div>
+                <div class="col-md-12 d-flex justify-content-center">
+                    <button type="submit" class="cont-btn">Continue
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

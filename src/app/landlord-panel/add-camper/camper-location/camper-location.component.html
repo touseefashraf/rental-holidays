@@ -1,0 +1,27 @@
+<div class="m-container">
+    <form [formGroup]="profileFG" (ngSubmit)="save(profileFG)" #f="ngForm">
+        <input type="hidden" class="" formControlName="lat" [ngClass]="{'form-submitted': f.submitted}" />
+        <input type="hidden" class="" formControlName="lng" [ngClass]="{'form-submitted': f.submitted}" />
+        <div class="detail-body">
+            <p>YOUR CAMPER Location</p>
+            <p>Get request from tenants near you</p>
+            <div class="location">
+                <input type="text" class="weight-input" placeholder="eg. AlexanderPlatz" #search formControlName="location"><span style="margin-left:-25px; color:  #c9b084;font-size: 20px;cursor: pointer;"><i class="fas fa-map-marker-alt"></i></span>
+                <p>Please enter your post code or street in the address field</p>
+            </div>
+            <div class="google-map" *ngIf="mapLng">
+                <agm-map [latitude]="mapLat" [longitude]="mapLng" (centerChange)="mapCenterChange($event)" (zoomChange)="mapZoomChange($event)" (mapReady)="mapReady($event)">
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
+                <i class="fas fa-info-circle"></i>
+                <p>The exact address will be only visible for the tenant once you accept the booking offer.</p>
+            </div>
+        </div>
+        <div class="foot">
+            <button [routerLink]="['../../camper-profile/'+vehicleId+'']">Back</button>
+            <button [disabled]="Loading" [ngClass]="Loading?'in-progress':''" type="submit">Next
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </form>
+</div>

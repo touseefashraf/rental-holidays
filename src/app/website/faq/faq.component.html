@@ -1,0 +1,38 @@
+<!--   Main Content Start Here   -->
+<main>
+    <section class="default_holder">
+        <div class="container">
+            <p class="top-message">Faq</p>
+            <p class="second-message one ">You’ll find answers to most of your questions below. We’ve divided them into headings to make it easier for you. Don’t worry if you still
+
+                don’t find the answers you seek, please send an email to support@camper.com to assistance </p>
+            
+           
+            <div class="default_content">
+                <ng-container *ngFor="let cat of faqData; let i = index">
+                    <div class="q-box-heading">
+                        <h2 class="text-left">{{'name' | trans: cat}}</h2>
+                        <div class="text-right">
+                            <p class="expand-collapse" (click)="expandAll(i)">Expend All</p>
+                            <div class="space"></div>
+                            <p class="expand-collapse" (click)="collapseAll(i)">COLLAPSE ALL</p>
+                        </div>
+                    </div>
+
+                    <ng-container *ngFor="let q of cat.faq; let i = index">
+                        <div class="question-div" (click)="q.collapse = !q.collapse" [attr.aria-expanded]="!q.collapse" aria-controls="collapseBasic">
+                            <span>{{'question' | trans: q}}</span>
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+
+                        <div [class]="q.collapse == 1 ? 'answer-div hide' : 'answer-div show'">
+                            <div class="well well-lg card card-block card-header">{{'answer' | trans: q}}</div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+        </div>
+    </section>
+</main>
+<!--   Main Content End Here   -->

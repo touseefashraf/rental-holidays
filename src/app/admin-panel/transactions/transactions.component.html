@@ -1,0 +1,141 @@
+<div class="row m-3 no-gutters">
+    <div class="col-md-12 mb-1">
+        <div class="d-flex justify-content-between title-wrapper">
+            <h2 class="title">Transactions</h2>
+        </div>
+
+        <form [formGroup]="searchForm" #f="ngForm">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="mb-0">Select User:</label>
+                    <!-- <input type="text" formControlName="user_id" class="form-control" placeholder="select user"> -->
+                    <ng-autocomplete #autocomplete class="form-control" placeholder="Search for users" [data]="userData" [searchKeyword]="keyword" (inputChanged)="onChangeSearch($event)" (selected)="selectEvent($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" [debounceTime]="" [minQueryLength]="3">
+                    </ng-autocomplete>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="mb-0">From Date:</label>
+                    <input formControlName="dateRange" class="form-control mt-0" type="text" bsDaterangepicker [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY',adaptivePosition: true }" placeholder="Enter Bid Date" [ngClass]="{'form-submitted': f.submitted}">
+                </div>
+
+                <!-- <div class="col-md-3 mb-3">
+                    <label class="mb-0">To Date:</label>
+                    <input formControlName="to_date" class="form-control mt-0" type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY',adaptivePosition: true }" placeholder="Enter Bid Date" [ngClass]="{'form-submitted': f.submitted}">
+                </div> -->
+
+                <div class="col-md-3 mb-1 d-flex">
+                    <div class="px-2">
+                        <label class="mb-0">&nbsp;</label>
+                        <div class="clear"></div>
+                        <button type="submit" (click)="search(f)" class="btn green" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''"> <i class="fa fa-search" aria-hidden="true"></i> Search
+                            <span></span><span></span><span></span>
+                        </button>
+                    </div>
+                    <div class="px-2">
+                        <label class="mb-0">&nbsp;</label>
+                        <div class="clear"></div>
+                        <button type="reset" (click)="reset(f)" class="btn green" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''"> Clear
+                            <span></span><span></span><span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Transactions Type</th>
+                        <th>Description</th>
+                        <th>Transactions date</th>
+                        <th>Amount</th>
+
+                    </tr>
+                </thead>
+
+                <ng-container *ngIf="dataStatus == 'fetching'">
+                    <tbody [appSkeletonTabelLoader]="loaderOptions"></tbody>
+                </ng-container>
+                <ng-container *ngIf="dataStatus == 'done'">
+                    <tbody *ngIf="this.listTransactionData.length > 0 else noDataFound">
+
+                        <tr *ngFor="let transaction of this.listTransactionData; let i = index">
+                            <td>{{transaction.id}} </td>
+                            <td>{{transaction.user.landlord.first_name}} {{transaction.user.landlord.last_name}} </td>
+                            <td>{{transaction.trans_type}} </td>
+                            <td>{{transaction.description}} </td>
+                            <td>{{transaction.trans_date}} </td>
+                            <td>{{transaction.amount}} </td>
+                        </tr>
+                    </tbody>
+                    <ng-template #noDataFound>
+                        <tbody>
+                            <tr>
+                                <td colspan="7">
+                                    <app-no-data-found></app-no-data-found>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </ng-container>
+            </table>
+            <nav class="paginationCover" aria-label="Page navigation example" *ngIf="dataStatus == 'done'">
+                <ul class="pagination justify-content-left  mt-3">
+                    <li class="page-item">
+                        <small *ngIf="page<10">Current Page: 0{{page}}</small>
+                        <small *ngIf="page>=10">Current Page: {{page}}</small>
+                    </li>
+                </ul>
+                <ul class="pagination justify-content-left">
+                    <li class="page-item" *ngIf="pagination.prev_page_url != null">
+                        <a class="page-link" href="javascript: void(0)" tabindex="-1" (click)="setPagination(page-1)">Previous</a>
+                    </li>
+                    <li class="page-item disabled" *ngIf="pagination.prev_page_url == null">
+                        <a class="page-link" href="javascript: void(0)" tabindex="-1">Previous</a>
+                    </li>
+                    <ng-container *ngIf="pagination.last_page <= 6">
+                        <ng-container *ngFor="let p of [].constructor(pagination.last_page); let i=index">
+                            <li [class]="page==(i+1) ? 'page-item active' : 'page-item'">
+                                <a class="page-link" href="javascript: void(0)" (click)="setPagination(i+1)">{{i+1}}</a>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="pagination.last_page >= 7">
+                        <ng-container *ngFor="let p of [].constructor(pagination.last_page); let i=index">
+                            <li *ngIf="i<4" [class]="page==(i+1) ? 'page-item active' : 'page-item'">
+                                <a class="page-link" href="javascript: void(0)" (click)="setPagination(i+1)">{{i+1}}</a>
+                            </li>
+                            <li *ngIf="(pagination.last_page-i) == 3" [class]="page==(i+1) ? 'page-item active' : 'page-item'">
+                                <a class="page-link">...</a>
+                            </li>
+                            <li *ngIf="(pagination.last_page-i)==1 || (pagination.last_page-i)==2" [class]="page==(i+1) ? 'page-item active' : 'page-item'">
+                                <a class="page-link" href="javascript: void(0)" (click)="setPagination(i+1)">{{i+1}}</a>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                    <li class="page-item" *ngIf="pagination.next_page_url != null">
+                        <a class="page-link" href="javascript: void(0)" tabindex="-1" (click)="setPagination(+page+1)">Next</a>
+                    </li>
+                    <li class="page-item disabled" *ngIf="pagination.next_page_url == null">
+                        <a class="page-link" href="javascript: void(0)" tabindex="-1">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </div>
+</div>
+
+
+<ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+</ng-template>
+
+<ng-template #notFoundTemplate>
+    <div>
+        <p class="no-loc">No User Matched</p>
+    </div>
+</ng-template>

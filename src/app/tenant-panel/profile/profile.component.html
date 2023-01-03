@@ -1,0 +1,64 @@
+<div class="heading">
+    <h3>Profile:</h3>
+</div>
+<div class="form_holder">
+    <form [formGroup]="profileFG" (ngSubmit)="save(profileFG)" #f="ngForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>First Name<span class="mendatory">*</span></label>
+                    <input type="text" formControlName="first_name" placeholder="Enter First Name" [ngClass]="{'form-submitted': f.submitted}" />
+                    <div *ngIf="ui.checkErrors(g.first_name, f)" class="errors">
+                        <p *ngIf="g.first_name.errors.required">First Name is Required</p>
+                        <p *ngIf="g.first_name.errors.maxlength">First Name cant exceed from {{g.first_name.errors.maxlength.requiredLength}} Characters</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Last Name<span class="mendatory">*</span></label>
+                    <input type="text" formControlName="last_name" placeholder="Enter Last Name" [ngClass]="{'form-submitted': f.submitted}" />
+                    <div *ngIf="ui.checkErrors(g.last_name, f)" class="errors">
+                        <p *ngIf="g.last_name.errors.required">Last name is required</p>
+                        <p *ngIf="g.last_name.errors.maxlength">Last Name cant exceed from {{g.last_name.errors.maxlength.requiredLength}} Characters</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Contact<span class="mendatory">*</span></label>
+                    <input type="text" formControlName="contact_1" placeholder="Enter Contact# 1" [ngClass]="{'form-submitted': f.submitted}" />
+                    <div *ngIf="ui.checkErrors(g.contact_1, f)" class="errors">
+                        <p *ngIf="g.contact_1.errors.required">Contact is required</p>
+                        <p *ngIf="g.contact_1.errors.maxlength">Contact cant exceed from {{g.contact_1.errors.maxlength.requiredLength}} Characters</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Landline</label>
+                    <input type="text" formControlName="contact_2" placeholder="Enter Landline no." [ngClass]="{'form-submitted': f.submitted}" />
+                    <div *ngIf="ui.checkErrors(g.contact_2, f)" class="errors">
+                        <p *ngIf="g.contact_2.errors.maxlength">Landline cant exceed from {{g.contact_2.errors.maxlength.requiredLength}} Characters</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Address<span class="mendatory">*</span></label>
+                    <input type="text" class="address-field" formControlName="address" placeholder="Search location" #search [ngClass]="{'form-submitted': f.submitted}" />
+                    <a class="marker" (click)="getLocation()"><i class="fas fa-map-marker-alt address"></i></a>
+                    <div *ngIf="ui.checkErrors(g.address, f)" class="errors">
+                        <p *ngIf="g.address.errors.required">Address is required</p>
+                        <p *ngIf="g.address.errors.maxlength">Address cant exceed from {{g.address.errors.maxlength.requiredLength}} Characters</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button [disabled]="updateLoading" type="submit"  [ngClass]="updateLoading?'in-progress':''">Update Profile
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </form>
+</div>

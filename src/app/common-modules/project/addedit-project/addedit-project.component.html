@@ -1,0 +1,373 @@
+<div class="main-container" *ngIf="dataService.step == 'details'">
+    <app-steps-template [step]="'projectDetails'"></app-steps-template>
+    <form [formGroup]="projectForm" (ngSubmit)="save(projectForm, f)" #f="ngForm">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Title</label>
+                <input type="text" class="fadeIn" formControlName="title" placeholder="Enter Title" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.title, f)" class="errors">
+                    <p *ngIf="g.title.errors.required">Title is Required</p>
+                    <p *ngIf="g.title.errors.maxlength">Title Max-length should not exceed {{ g.title.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Solicitation</label>
+                <input type="text" class="fadeIn" formControlName="solicitation" placeholder="Enter Solicitation" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.solicitation, f)" class="errors">
+                    <p *ngIf="g.solicitation.errors.required">Solicitation is Required</p>
+                    <p *ngIf="g.solicitation.errors.maxlength">Solicitation Max-length should not exceed {{ g.solicitation.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Bid Amount</label>
+                <input type="number" min="0" class="fadeIn" formControlName="bid_amount" placeholder="Enter Bid Amount" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.bid_amount, f)" class="errors">
+                    <p *ngIf="g.bid_amount.errors.required">Bid Amount is Required</p>
+                    <p *ngIf="g.bid_amount.errors.min">Bid Amount cant be less then 0</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Project Location</label>
+                <!-- <input type="text" class="fadeIn" formControlName="project_location" placeholder="Enter Project Location" [ngClass]="{'form-submitted': f.submitted}" /> -->
+                <!-- <div class="loc-marker">
+                    <input type="text" formControlName="project_location" placeholder="Enter Project Location" [ngClass]="{'form-submitted': f.submitted}" #searchProjectLoc>
+                    <a class="marker" (click)="getProjectLocation()"><i class="fas fa-map-marker-alt"></i></a>
+                </div> -->
+                <div class="loc-marker input-group">
+                    <input type="text" formControlName="project_location" placeholder="Enter Project Location" [ngClass]="{'form-submitted': f.submitted}" #searchProjectLoc>
+                    <div class="input-group-append">
+                        <span class="marker input-group-text" (click)="getProjectLocation()"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                </div>
+
+                <div *ngIf="ui.checkErrors(g.project_location, f)" class="errors">
+                    <p *ngIf="g.project_location.errors.minlength">Project Location Min-length should not be less then {{ g.project_location.errors.minlength.requiredLength }} Characters</p>
+                    <p *ngIf="g.project_location.errors.maxlength">Project Location Max-length should not exceed {{ g.project_location.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Bid Method</label>
+                <input type="text" class="fadeIn" formControlName="bid_method" placeholder="Enter Bid Method" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.bid_method, f)" class="errors">
+                    <p *ngIf="g.bid_method.errors.required">Bid Method is Required</p>
+                    <p *ngIf="g.bid_method.errors.maxlength">Bid Method Max-length should not exceed {{ g.bid_method.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Bid Date</label>
+                <input type="text" class="fadeIn" [minDate]="minDate" bsDatepicker [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY' }" formControlName="bid_date" placeholder="Enter Bid Date" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.bid_date, f)" class="errors">
+                    <p *ngIf="g.bid_date.errors.required">Bid Method is Required</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Bid Time</label>
+                <timepicker class="time-custom" formControlName="bidTime" [ngClass]="{'form-submitted': f.submitted}">
+                </timepicker>
+                <div *ngIf="ui.checkErrors(g.bidTime, f)" class="errors">
+                    <p *ngIf="g.bidTime.errors.required">Bid Time is Required</p>
+                </div>
+            </div>
+            <!-- <div class="col-md-3" *ngIf="dataStatus == 'done'">
+                <label>Bid Phase</label>
+                <select disabled [(ngModel)]="dataService.bidPhase" [ngModelOptions]="{standalone: true}" [ngClass]="{'form-submitted': f.submitted}">
+                    <option disabled [value]="null">Select Option</option>
+                    <option value="open">Open</option>
+                    <option value="bid_results">Bid Results</option>
+                    <option value="awarded">Awarded</option>
+                </select>
+            </div>   This is old with disbabled conditions--> 
+
+            <div class="col-md-3" *ngIf="dataStatus == 'done'">
+                <label>Bid Phase</label>
+                <select [(ngModel)]="dataService.bidPhase" [ngModelOptions]="{standalone: true}" [ngClass]="{'form-submitted': f.submitted}">
+                    <option disabled [value]="null">Select Option</option>
+                    <option value="open">Open</option>
+                    <option value="bid_results">Bid Results</option>
+                    <option value="awarded">Awarded</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Completion Time</label>
+                <input type="text" min="0" class="fadeIn" formControlName="completion_time" placeholder="Enter Completion Time" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.completion_time, f)" class="errors">
+                    <p *ngIf="g.completion_time.errors.required">Completion Time is Required</p>
+                    <!-- <p *ngIf="g.completion_time.errors.min">Completion Time cant be less then 0</p> -->
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Notes</label>
+                <input type="text" class="fadeIn" formControlName="notes" placeholder="Enter Notes" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.notes, f)" class="errors">
+                    <p *ngIf="g.notes.errors.maxlength">Notes Max-length should not exceed {{ g.notes.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+            <ng-container *ngIf="dataService.selectedId == -1">
+                <div class="col-md-3">
+                    <label>Project Type</label>
+                    <select class="fadeIn" formControlName="project_type" [ngClass]="{'form-submitted': f.submitted}">
+                        <option disabled [value]="null">Select Type</option>
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                    <div *ngIf="ui.checkErrors(g.project_type, f)" class="errors">
+                        <p *ngIf="g.project_type.errors.required">Project Type is Required</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3" *ngIf="projectForm.value.project_type !== 'public'">
+                    <label>Customer</label>
+                    <select class="fadeIn" formControlName="user_id" [ngClass]="{'form-submitted': f.submitted}">
+                        <option disabled [value]="null">Select Customer</option>
+                        <option *ngFor="let d of dataService.customerList" [value]="d.id">{{d.customer.first_name}} {{d.customer.last_name}}</option>
+                    </select>
+                    <div *ngIf="ui.checkErrors(g.user_id, f)" class="errors">
+                        <p *ngIf="g.user_id.errors.required">Customer is Required</p>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-md-3">
+                <label>Pre Bid Meeting Date</label>
+                <input type="text" class="fadeIn" [minDate]="minDate" bsDatepicker [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY' }" formControlName="pre_bid_date" placeholder="Enter Pre Bid Meeting" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.pre_bid_date, f)" class="errors">
+                    <p *ngIf="g.pre_bid_date.errors.required">Pre Bid Meeting is Required</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Pre Bid Time</label>
+                <timepicker class="time-custom" formControlName="preBidMeetingTime" [ngClass]="{'form-submitted': f.submitted}">
+                </timepicker>
+                <div *ngIf="ui.checkErrors(g.preBidMeetingTime, f)" class="errors">
+                    <p *ngIf="g.preBidMeetingTime.errors.required">Pre Bid Time is Required</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Min Bid</label>
+                <input type="number" min="0" class="fadeIn" formControlName="min_bid" placeholder="Enter Min Bid" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.min_bid, f)" class="errors">
+                    <p *ngIf="g.min_bid.errors.required">Min Bid is Required</p>
+                    <p *ngIf="g.min_bid.errors.min">Min bid cant be less then 0</p>
+                    <p *ngIf="g.min_bid.errors.max">Min bid cant be greater then Max Bid</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Max Bid</label>
+                <input type="number" [min]="projectForm.value.min_bid" class="fadeIn" formControlName="max_bid" placeholder="Enter Max Bid" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.max_bid, f)" class="errors">
+                    <p *ngIf="g.max_bid.errors.required">Max Bid is Required</p>
+                    <p *ngIf="g.max_bid.errors.min">Max bid cant be less then min bid </p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>M.B.E. (%)</label>
+                <input type="number" [min]="0" max="100" class="fadeIn" formControlName="mbe" placeholder="Enter M.B.E." [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.mbe, f)" class="errors">
+                    <p *ngIf="g.mbe.errors.required">M.B.E. is Required</p>
+                    <p *ngIf="g.mbe.errors.min">M.B.E. cant be less then 0% </p>
+                    <p *ngIf="g.mbe.errors.max">M.B.E. cant be greater then 100% </p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>W.B.E. (%)</label>
+                <input type="number" [min]="0" class="fadeIn" formControlName="wbe" placeholder="Enter W.B.E." [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.wbe, f)" class="errors">
+                    <p *ngIf="g.wbe.errors.required">W.B.E. is Required</p>
+                    <p *ngIf="g.wbe.errors.min">W.B.E. cant be less then then 0% </p>
+                    <p *ngIf="g.wbe.errors.max">W.B.E. cant be greater then 100% </p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>E.E.O (%)</label>
+                <input type="number" [min]="0" class="fadeIn" formControlName="eeo" placeholder="Enter E.E.O" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.eeo, f)" class="errors">
+                    <p *ngIf="g.eeo.errors.required">E.E.O is Required</p>
+                    <p *ngIf="g.eeo.errors.min">E.E.O cant be less then 0% </p>
+                    <p *ngIf="g.eeo.errors.max">E.E.O cant be greater then 100% </p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>S.D.V.O.B (%)</label>
+                <input type="number" [min]="0" class="fadeIn" formControlName="sdvob" placeholder="Enter E.E.O" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.sdvob, f)" class="errors">
+                    <p *ngIf="g.sdvob.errors.required">E.E.O is Required</p>
+                    <p *ngIf="g.sdvob.errors.min">E.E.O cant be less then 0% </p>
+                    <p *ngIf="g.sdvob.errors.max">E.E.O cant be greater then 100% </p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Pre-Bid Location</label>
+                <!-- <input type="text" class="fadeIn" formControlName="pre_bid_location" placeholder="Enter Pre-Bid Location" [ngClass]="{'form-submitted': f.submitted}" /> -->
+                <!-- <div class="loc-marker">
+                    <input type="text" formControlName="pre_bid_location" placeholder="Enter Pre-Bid Location" [ngClass]="{'form-submitted': f.submitted}" #searchPreBidLoc>
+                    <a class="marker" (click)="getPreBidLocation()"><i class="fas fa-map-marker-alt"></i></a>
+                </div> -->
+                <div class="loc-marker input-group">
+                    <input type="text" formControlName="pre_bid_location" placeholder="Enter Pre-Bid Location" [ngClass]="{'form-submitted': f.submitted}" #searchPreBidLoc>
+                    <div class="input-group-append">
+                        <span class="marker input-group-text" (click)="getPreBidLocation()"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                </div>
+                <div *ngIf="ui.checkErrors(g.pre_bid_location, f)" class="errors">
+                    <p *ngIf="g.pre_bid_location.errors.required">Pre-Bid Location is Required</p>
+                    <p *ngIf="g.pre_bid_location.errors.minlength">Pre-Bid Location Min-length should not be less then {{ g.pre_bid_location.errors.minlength.requiredLength }} Characters</p>
+                    <p *ngIf="g.pre_bid_location.errors.maxlength">Pre-Bid Location Max-length should not exceed {{ g.pre_bid_location.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Doc Avalability Date</label>
+                <input type="text" class="fadeIn" [minDate]="minDate" bsDatepicker [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY' }" formControlName="doc_availability" placeholder="Enter Doc Availability" [ngClass]="{'form-submitted': f.submitted}" />
+            </div>
+            <div class="col-md-3">
+                <label>Q.T.O</label>
+                <select class="fadeIn" formControlName="qto_id" [ngClass]="{'form-submitted': f.submitted}">
+                    <option disabled [value]="null">Select Q.T.O</option>
+                    <option *ngFor="let d of dataService.qtoListDetails" [value]="d.id">{{d.first_name}} {{d.last_name}}</option>
+                </select>
+                <div *ngIf="ui.checkErrors(g.qto_id, f)" class="errors">
+                    <p *ngIf="g.qto_id.errors.required">Q.T.O is Required</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Liquidated Damages</label>
+                <input type="text" class="fadeIn" formControlName="liquidated_damages" placeholder="Enter Liquidated Damages" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.liquidated_damages, f)" class="errors">
+                    <p *ngIf="g.liquidated_damages.errors.required">Liquidated Damages is Required</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Bid Bond. (%)</label>
+                <input type="number" min="0" class="fadeIn" formControlName="b_bond" placeholder="Enter B-Bond" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.b_bond, f)" class="errors">
+                    <p *ngIf="g.b_bond.errors.required">Bid-Bond is Required</p>
+                    <p *ngIf="g.b_bond.errors.min">Bid-Bond cant be less then 0%</p>
+                    <p *ngIf="g.b_bond.errors.max">Bid-Bond cant be greater then 100%</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Performance Bond. (%)</label>
+                <input type="number" min="0" class="fadeIn" formControlName="p_bond" placeholder="Enter P-Bond" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.p_bond, f)" class="errors">
+                    <p *ngIf="g.p_bond.errors.required">Performance-Bond is Required</p>
+                    <p *ngIf="g.p_bond.errors.min">Performance-Bond cant be less then 0%</p>
+                    <p *ngIf="g.p_bond.errors.max">Performance-Bond cant be greater then 100%</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Payment Bond. (%)</label>
+                <input type="number" min="0" class="fadeIn" formControlName="pay_bond" placeholder="Enter Pay Bond" [ngClass]="{'form-submitted': f.submitted}" />
+                <div *ngIf="ui.checkErrors(g.pay_bond, f)" class="errors">
+                    <p *ngIf="g.pay_bond.errors.required">Payment Bond is Required</p>
+                    <p *ngIf="g.pay_bond.errors.min">Payment Bond cant be less then 0%</p>
+                    <p *ngIf="g.pay_bond.errors.max">Payment Bond cant be greater then 100%</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Bid Location</label>
+                <div class="loc-marker input-group">
+                    <input type="text" formControlName="bid_location" placeholder="Enter Bid Location" [ngClass]="{'form-submitted': f.submitted}" #searchBidLoc>
+                    <div class="input-group-append">
+                        <span class="marker input-group-text" (click)="getBidLocation()"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                </div>
+                <div *ngIf="ui.checkErrors(g.bid_location, f)" class="errors">
+                    <p *ngIf="g.bid_location.errors.required">Bid Location is Required</p>
+                    <p *ngIf="g.bid_location.errors.minlength">Bid Location Min-length should not be less then {{ g.bid_location.errors.minlength.requiredLength }} Characters</p>
+                    <p *ngIf="g.bid_location.errors.maxlength">Bid Location Max-length should not exceed {{ g.bid_location.errors.maxlength.requiredLength }} Characters</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Project Owner</label>
+                <select class="fadeIn" formControlName="project_owner_id" [ngClass]="{'form-submitted': f.submitted}">
+                    <option disabled [value]="null">Select Project Owner</option>
+                    <option *ngFor="let d of dataService.projectOwnerList" [value]="d.id">{{d.poc_first_name}} {{d.poc_last_name}}</option>
+                </select>
+                <div *ngIf="ui.checkErrors(g.project_owner_id, f)" class="errors">
+                    <p *ngIf="g.project_owner_id.errors.required">Project Owner is Required</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Youtube Link</label>
+                <input type="text" class="fadeIn" formControlName="youtube_link" placeholder="Enter Youtube Link " [ngClass]="{'form-submitted': f.submitted}" />
+            </div>
+
+            <div class="col-md-3" style="margin-top: 32px" *ngIf="dataService.selectedId < 0">
+                <input type="checkbox" formControlName="mark_as_new" [id]='mark_as_new' [checked]="markAsNew" [(ngModel)]="markAsNew" [ngModelOptions]="{standalone: true}">
+                <label [for]="mark_as_new">New Project</label>
+            </div>
+
+            <div class="col-md-3" style="margin-top: 32px" *ngIf="dataService.selectedId > 0">
+                <input type="checkbox" formControlName="mark_as_update" [id]='mark_as_new_update' [checked]="markAsUpdate" [(ngModel)]="markAsUpdate" [ngModelOptions]="{standalone: true}">
+                <label [for]="mark_as_new_update">Mark As Update</label>
+            </div>
+
+            <div class="col-md-6" *ngIf="markAsUpdate == true">
+                <label>Update Description</label>
+                <textarea class="fadeIn" formControlName="update_description" placeholder="Update Info" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+            </div>
+
+
+            <div class="col-md-12">
+                <label>Description</label>
+                <textarea class="fadeIn" formControlName="description" placeholder="Enter Description" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+            </div>
+
+
+
+            <div class="col-md-12">
+                <label>CSI Division</label>
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let d of dataService.csiDivisionList; let i = index">
+                        <input type="checkbox" [checked]="checkcsiId(d.id)" [id]="'csi-'+d.id" [name]="'csi-'+i+d.name" [value]="d.id" (change)="spliceAddCsiId(d.id)">
+                        <label [for]="'csi-'+d.id">{{d.name}}</label><br>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+                <label>Plan Holders</label>
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let d of dataService.planHoldersList; let i = index">
+                        <input type="checkbox" [checked]="checkphId(d.id)" [id]="'ph-'+d.id" [name]="'ph-'+i+d.name" [value]="d.id" (change)="spliceAddPlanholdersIds(d.id)">
+                        <label [for]="'ph-'+d.id">{{d.company_name}}</label><br>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="d-flex align-items-center">
+            <button type="button" class="sm black" aria-label="Close" (click)="cancel()">Goto List</button>
+            <!-- <button type="submit" class="sm red">Save and Next <i class="fas fa-arrow-right f-10 ml-2"></i></button> -->
+            <button [disabled]="isLoading" [ngClass]="isLoading?'in-progress':''" type="submit" class="sm green">Save & Next <i class="fas fa-arrow-right f-10 ml-2"></i>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </form>
+</div>
+<ng-container *ngIf="dataStatus == 'done'">
+    <app-add-planholders *ngIf="dataService.step == 'planholders'"></app-add-planholders>
+    <app-add-spec-doc *ngIf="dataService.step == 'spec'"></app-add-spec-doc>
+    <app-add-plan-doc *ngIf="dataService.step == 'plan'"></app-add-plan-doc>
+    <app-add-addendum-doc *ngIf="dataService.step == 'addendum'"></app-add-addendum-doc>
+    <app-add-other-doc *ngIf="dataService.step == 'other'"></app-add-other-doc>
+    <app-add-qto-doc *ngIf="dataService.step == 'qto'"></app-add-qto-doc>
+</ng-container>

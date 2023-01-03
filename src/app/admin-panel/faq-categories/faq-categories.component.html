@@ -1,0 +1,165 @@
+<!-- <p>
+  faq-categories works!
+</p> -->
+
+<div class="main-container">
+
+    <div class="title-wrapper">
+        <h2 class="title">FAQ Categories</h2>
+        <button type="button" class="sm red pull-right" (click)="openModalFAQCat(faqCatTemplate, -1)">Add FAQ Category</button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name (English)</th>
+                    <th>Name (German)</th>
+                    <th>Name (Dutch)</th>
+                    <th>Name (French)</th>
+                    <th class="col-actions">Action</th>
+                </tr>
+            </thead>
+            <ng-container *ngIf="dataStatus == 'fetching'">
+                <tbody  [appSkeletonTabelLoader]="loaderOptions"></tbody>
+            </ng-container>
+            <ng-container *ngIf="dataStatus == 'done'">
+            <tbody *ngIf="faqCategoriesData.length > 0 && dataStatus == 'done'; else noDataFound">
+                <ng-container *ngFor="let faq of faqCategoriesData; let i = index">
+                    <tr>
+                        <td>{{faq.name_en}}</td>
+                        <td>{{faq.name_de}}</td>
+                        <td>{{faq.name_nl}}</td>
+                        <td>{{faq.name_fr}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="sm green" (click)="openModalFAQCat(faqCatTemplate, i)">Edit</button>
+                                <a [routerLink]="['/admin/faq-questions/'+faq.id]"><button type="button" class="sm blue">View</button></a>
+                                <button type="button" class="sm red" (click)="confirmingModal(faqCatConfirming, faq.id,i)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+            </ng-container>
+            <ng-template #noDataFound>
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <app-no-data-found></app-no-data-found>
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-template>
+
+
+        </table>
+    </div>
+</div>
+
+<ng-template #faqCatTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add FAQ Category</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="faqCatForm" (ngSubmit)="saveFAQCat(faqCatForm, f)" #f="ngForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Name English</label>
+                            <input formControlName="name_en" class="form-control mt-0" placeholder="Enter English FAQ category name" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(this.faqCatForm.controls.name_en, f)" class="errors">
+                                <p *ngIf="g.name_en.errors.required">Name is required</p>
+                                <p *ngIf="g.name_en.errors.maxlength">Name should be less than 255 Characters</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Name German</label>
+                            <input formControlName="name_de" class="form-control mt-0" placeholder="Enter German FAQ category name" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.name_de, f)" class="errors">
+                                <p *ngIf="g.name_de.errors.required">Name is required</p>
+                                <p *ngIf="g.name_de.errors.maxlength">Name should be less than 255 Characters</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Name Dutch</label>
+                            <input formControlName="name_nl" class="form-control mt-0" placeholder="Enter Dutch FAQ category name" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.name_nl, f)" class="errors">
+                                <p *ngIf="g.name_nl.errors.required">Name is required</p>
+                                <p *ngIf="g.name_nl.errors.maxlength">Name should be less than 255 Characters</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Name French</label>
+                            <input formControlName="name_fr" class="form-control mt-0" placeholder="Enter French FAQ category name" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.name_fr, f)" class="errors">
+                                <p *ngIf="g.name_fr.errors.required">Name is required</p>
+                                <p *ngIf="g.name_fr.errors.maxlength">Name should be less than 255 Characters</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Description English</label>
+                            <textarea rows="3"  formControlName="description_en" class="form-control mt-0" placeholder="Enter English FAQ category description" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.description_en, f)" class="errors">
+                                <p *ngIf="g.description_en.errors.required">Description is required</p>
+                                <p *ngIf="g.description_en.errors.maxlength">Description should be less than 500 Characters</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Description German</label>
+                            <textarea rows="3"  formControlName="description_de" class="form-control mt-0" placeholder="Enter German FAQ category description" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.description_de, f)" class="errors">
+                                <p *ngIf="g.description_de.errors.required">Description is required</p>
+                                <p *ngIf="g.description_de.errors.maxlength">Description should be less than 500 Characters</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Description Dutch</label>
+                            <textarea rows="3"  formControlName="description_nl" class="form-control mt-0" placeholder="Enter Dutch FAQ category description" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.description_nl, f)" class="errors">
+                                <p *ngIf="g.description_nl.errors.required">Description is required</p>
+                                <p *ngIf="g.description_nl.errors.maxlength">Description should be less than 500 Characters</p>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Description French</label>
+                            <textarea rows="3"  formControlName="description_fr" class="form-control mt-0" placeholder="Enter French FAQ category description" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.description_fr, f)" class="errors">
+                                <p *ngIf="g.description_fr.errors.required">Description is required</p>
+                                <p *ngIf="g.description_fr.errors.maxlength">Description should be less than 500 Characters</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="red sm m-1" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''">save
+                <span></span><span></span><span></span>
+            </button>
+            <button type="button" class="black sm ml-1" (click)="cancelFAQCatButton(f)">Cancel</button>
+
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #faqCatConfirming>
+    <div class="modal-body text-center">
+        <p>Do you want to Delete?</p>
+        <button type="button" class="green sm" (click)="deleteFAQCat()" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''">Yes
+            <span></span><span></span><span></span>
+        </button>
+        <button type="button" class="red sm" (click)="modalRef.hide()">No</button>
+    </div>
+</ng-template>

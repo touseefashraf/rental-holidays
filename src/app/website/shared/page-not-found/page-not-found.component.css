@@ -1,0 +1,22 @@
+.box {
+    background-color: #d0d0d0;
+    height: 72vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    margin: 6% 0 1% 0;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 40px;
+    color: #525252;
+    border: 1px solid #bfa16b;
+    padding: 5px;
+    border-radius: 5px;
+}
+span {
+    font-size: 22px;
+    color: #bfa16b;
+}

@@ -1,0 +1,78 @@
+<!-- <p>
+  camper-conditions works!
+</p> -->
+<div class="container m-container">
+    <div class="row">
+        <div class="detail-body">
+            <div class="detail-text">
+                <p>YOUR CAMPER CONDITIONS</p>
+            </div>
+            <form class="form-group" [formGroup]="camperDetailsForm" (ngSubmit)="save(camperDetailsForm, f)" #f="ngForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="">Driving License</label>
+                        <select type="number" formControlName="driving_license" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Animals Allowed</label>
+                        <select type="number" formControlName="animals_allowed" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Smoking Allowed</label>
+                        <select type="number" formControlName="smoking_allowed" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <label for="">Driving Experience</label>
+                            <input min="0" max="99" formControlName="driving_license_possesion" class="weight-input" placeholder="Years Driving" type="number" [ngClass]="{'form-submitted': f.submitted}"><span style="margin-left:-45px;">Years</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <label for="">Deposite Amount</label>
+                            <input min="0" max="9999" formControlName="deposite_amount" class="weight-input" placeholder="Amount" type="number" [ngClass]="{'form-submitted': f.submitted}"><span style="margin-left:-25px;">€</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <label for="">Minimum Age</label>
+                            <input min="0" max="99" formControlName="tenant_min_age" class="weight-input" placeholder="Age" type="number" [ngClass]="{'form-submitted': f.submitted}"><span style="margin-left:-45px;">Years</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Other Condition</label>
+                        <input formControlName="other_condition" class="form-control" placeholder="Other Condition" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="">Camper Descriptions:</label>
+                        <textarea name="" id="" cols="30" rows="8" formControlName="description" class="form-control" placeholder="Description" type="text" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="">Camper Additional Equipment:</label>
+                        <textarea name="" id="" cols="30" rows="8" formControlName="additional_equipment" class="form-control" placeholder="Additional Equipment" type="text" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                    </div>
+
+                </div>
+                <div class="foot">
+                    <button [routerLink]="['../../camper-location/'+vehicleId+'']">Back</button>
+                    <button type="submit" [disabled]="Loading" [ngClass]="Loading?'in-progress':''">Next
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

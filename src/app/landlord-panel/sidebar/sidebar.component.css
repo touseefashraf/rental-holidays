@@ -1,0 +1,79 @@
+/*Sidebar*/
+.sidebar_navigation {
+    background: #fff;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border: 1px solid #f1f1f1;
+}
+.sidebar_navigation i{
+color: burlywood;
+}
+.sidebar_navigation span{
+color: black;
+}
+.sidebar_navigation ul li {
+    border-bottom: 1px solid #F1F1F1;
+    margin-bottom: 20px;
+    list-style-type: none;
+}
+.sidebar_navigation ul li a {
+    font-size: 16px;
+    padding: 10px 0;
+    display: block;
+    text-decoration: none;
+}
+.sidebar_navigation ul li a span {
+    margin-left: 10px;
+}
+.sidebar_navigation ul li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.sidebar_navigation ul li a:hover,
+.sidebar_navigation ul li.active a {
+    color: #0f75bc;
+}
+.profile {
+    color: #EE4436;
+}
+.private {
+    color: #084887;
+}
+.search {
+    color: #888;
+}
+.wishlist {
+    color: red;
+}
+.download {
+    color: green;
+}
+.password {
+    color: orange;
+}
+.logout {
+    color : #D40000;
+}
+.sidebar-bottom-margin {
+    margin-bottom: 20px;
+}
+.sidebar_navigation li.active {
+    background-color: burlywood;
+    color: #fff;
+    border-radius: 5PX;
+}
+.sidebar_navigation li.active span{
+    color: #000;
+}
+.sidebar_navigation li.active i{
+    color: #000;
+}
+@media only screen and (max-width: 768px){
+   .sidebar_navigation {
+       padding: 15px 2px;
+   }
+    .sidebar_navigation ul li a{
+        font-size: 13px;
+    }
+}

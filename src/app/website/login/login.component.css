@@ -1,0 +1,199 @@
+.signin-container {
+    /* height: 100vh; */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d0d0d0;
+}
+.signin-box {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    margin: 150px 0 50px 0;
+}
+.logo-container {
+    width: 50%;
+}
+.logo-container {
+    position: relative;
+}
+.logo {
+    background-color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.logo > img {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+img.bg-img {
+    width: 100%;
+}
+.login-container {
+    width: 50%;
+    background-color: #fff;
+    border-radius: 0 5px 5px 0;
+}
+.heading {
+    font-size: 25px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 25px 0 0;
+}
+.h-line {
+    margin: 10px 0 30px;
+}
+.input-icon {
+    margin-left: -38px;
+    color: #a0a0a0;
+    font-size: 16px;
+}
+.login-head,
+.login-form,
+.footer-container {
+    margin: 0 25px;
+}
+label {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 15px 0 0.5rem 0;
+}
+label .pass {
+    margin-top: 20px;
+}
+input {
+    background-color: #f7f4ef;
+    border: 1px solid #929292;
+    padding: 10px 10px;
+    border-radius: 4px;
+    width: 100%;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+p.remember {
+    font-size: 20px;
+    margin: 30px 0 0;
+    display: none;
+}
+i.fa.fa-check {
+    background-color: #bfa16c;
+    color: #fff;
+    padding: 3px;
+    border-radius: 3px;
+}
+a.forget-pass {
+    color: #bfa16c;
+    font-size: 20px;
+    text-decoration: underline;
+}
+.remember > span {
+    margin: 0 8px 0 0;
+}
+.btn-container {
+    margin: 50% 0 0 0;
+}
+button.login-btn {
+    background-color: #bfa16b;
+    padding: 20px 120px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.button-container button {
+    padding: 6px 12px;
+}
+.footer-container {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+.footer-container a {
+    color: #bfa16b;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.sign-up {
+    font-weight: bold;
+}
+.facebook-btn {
+    background-color: #3b5998;
+    color: #fff;
+    margin-right: 6px;
+}
+.google-btn {
+    background-color: #dd4b39;
+    color: white;
+}
+.input-container {
+    margin-bottom: 20px;
+}
+.login-btn-container {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .btn-container {
+        margin: 25% 0 0 0;
+    }
+    button.login-btn {
+        padding: 15px 100px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .signin-box {
+        width: 95%;
+    }
+    .btn-container {
+        margin: 15% 0 0 0;
+    }
+    button.login-btn {
+        padding: 15px 90px;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .signin-box {
+        width: 100%;
+        flex-direction: column;
+    }
+    img.bg-img {
+        width: 425px;
+    }
+    .h-line {
+        width: 100%;
+    }
+    .logo-container,
+    .login-container {
+        width: 100%;
+    }
+    .footer-container a {
+        margin: 0 0 15px 0;
+    }
+}
+@media only screen and (max-width: 375px) {
+    img.bg-img {
+        width: 375px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    img.bg-img {
+        width: 320px;
+    }
+    button.login-btn {
+        padding: 12px 80px;
+    }
+    .footer-container {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,131 @@
+<!-- <div class="box">
+    <h3>
+        Booked camper will be displayed here!
+    </h3>
+</div> -->
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <select [(ngModel)]="filters.status">
+            <option value="">All</option>
+            <ng-container *ngFor="let s of status">
+                <option [value]="s">{{ s | uppercase}}</option>
+            </ng-container>
+        </select>
+    </div>
+    <div>
+        <button (click)="getBookingRequests()" class="golden sm" style="margin: 0;" [disabled]="searchLoading" [ngClass]="searchLoading?'in-progress':''">Search <span></span><span></span><span></span></button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Camper Title</th>
+            <th>Price</th>
+            <th>Pickup Date</th>
+            <th>Return Date</th>
+            <th style="width: 142px;">Status</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <ng-container *ngIf="dataStatus == 'fetching'">
+        <!-- <tbody [appSkeletonTabelLoader]="loaderOptions"></tbody> -->
+        <img src="/assets/images/spinner.svg" style="width: 100px; margin-top:8%;margin-bottom:8%;">
+    </ng-container>
+    <ng-container *ngIf="dataStatus == 'done'">
+        <tbody *ngIf="this.bookingRequestList.length > 0">
+            <tr *ngFor="let d of this.bookingRequestList; let i = index">
+                <td>{{d.landlord_vehicle.title }} </td>
+                <td>{{d.price}} </td>
+                <td>{{d.start_date | date:'dd/MM/yyyy' }} </td>
+                <td>{{d.end_date | date:'dd/MM/yyyy' }} </td>
+                <td>
+                    <span [class]="getStatusClass(d.status)">{{ getStatusFormat(d.status) }}</span>
+                </td>
+                <td class="d-flex justify-content-center align-content-center">
+                    <ng-container *ngIf="d.status == 'pending'">
+                        <button type="button" class="sm red" (click)="cancelRequest(d.id, i)">Cancel Request</button>
+                    </ng-container>
+                    <ng-container *ngIf="d.status == 'approved'">
+                        <p style="margin: 0; padding: 11px 0.75rem;">{{d.response_note}}</p>
+                    </ng-container>
+                    <ng-container *ngIf="d.status == 'rejected'">
+                        <p style="margin: 0; padding: 11px 0.75rem;">{{d.response_note}}</p>
+                    </ng-container>
+                    <ng-container *ngIf="d.status == 'CBT'">
+                        <p style="margin: 0; padding: 11px 0.75rem;">You have cancelled this request.</p>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+        <ng-template #noDataFound>
+            <tbody>
+                <tr>
+                    <td colspan="6">
+                        <app-no-data-found></app-no-data-found>
+                    </td>
+                </tr>
+            </tbody>
+        </ng-template>
+    </ng-container>
+</table>
+
+<!-- <div class="row m-3 no-gutters">
+    <div class="col-md-12 mb-1">
+        <div class="d-flex justify-content-between title-wrapper">
+            <h2 class="title">Amenities</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Camper Title</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+
+                <ng-container *ngIf="dataStatus == 'fetching'">
+                    <tbody [appSkeletonTabelLoader]="loaderOptions"></tbody>
+                </ng-container>
+                <ng-container *ngIf="dataStatus == 'done'">
+                    <tbody *ngIf="this.bookingRequestList.length > 0">
+                        <tr *ngFor="let d of this.bookingRequestList; let i = index">
+                            <td>{{d.landlord_vehicle.title }} </td>
+                            <td>{{d.start_date | date:'longDate' }} </td>
+                            <td>{{d.end_date | date:'longDate' }} </td>
+                            <td>{{d.price}} </td>
+                            <td>
+                                <span *ngIf="d.status=='pending'" class="i-badge yellow sm status">{{d.status}}</span>
+                                <span *ngIf="d.status=='approved'" class="i-badge green sm status">{{d.status}}</span>
+                                <span *ngIf="d.status=='rejected'" class="i-badge red sm status">{{d.status}}</span>
+                            </td>
+                            <td class="d-flex justify-content-center align-content-center">
+                                <ng-container *ngIf="d.status == 'pending'">
+                                    <button type="button" class="sm green">Approve</button>
+                                    <button type="button" class="sm red">Reject</button>
+                                </ng-container>
+                                <div class="px-3">
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <ng-template #noDataFound>
+                        <tbody>
+                            <tr>
+                                <td colspan="6">
+                                    <app-no-data-found></app-no-data-found>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,89 @@
+.m-container{
+    position: relative;
+    width: 80%;
+    margin: 0px auto;
+    /* border: 1px solid black; */
+    box-shadow: 0px 0px 30px 0.1px rgb(182, 182, 182);
+    background-color: white;
+    background-image: url('/assets/img/hills.png');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    padding-bottom: 120px;
+    padding-top: 110px;
+
+}
+.head{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid rgb(189, 189, 189) ;
+}
+.head img{
+    width: 100px;
+    padding: 5px;
+}
+.detail-body{
+    width: 50%;
+    margin: 20px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.detail-body img{
+    width: 100px;
+}
+.detail-body p:nth-child(1){
+    font-size: 18px;
+    font-weight: bold;
+}
+.detail-body p:nth-child(2){
+    font-size: 12px;
+    font-weight: 700;
+}
+.detail-body button{
+    background-color: #c9b084;
+    border: none;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+
+
+.foot button:nth-child(1){
+    background-color: #f7f5f0;
+    border: 2px solid #c9b084;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: #c9b084;
+    font-weight: bold;
+    margin-left: 20px;
+
+
+}
+.foot button:nth-child(2){
+    background-color: #c9b084;
+    border: none;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+
+
+}
+@media only screen and (max-width: 528px){
+    .detail-body{
+        width: 90%;
+
+    }
+}

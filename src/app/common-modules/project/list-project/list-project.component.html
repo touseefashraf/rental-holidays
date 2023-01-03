@@ -1,0 +1,166 @@
+<div class="main-container">
+    <div class="d-flex justify-content-between">
+        <h4>Projects List</h4>
+        <button type="button" class="red pull-right" (click)="add()">Add Project</button>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label>Title</label>
+            <input type="text" class="form-control" [(ngModel)]="searchTitle" placeholder="Search By Title">
+        </div>
+
+        <div class="col col d-flex align-items-end">
+            <label>&nbsp;</label>
+            <div class="btn-group" dropdown>
+                <button [disabled]="waiting.search" [ngClass]="waiting.search?'in-progress':''" type="button" class="lg green" (click)="page = 1;getProjects();fetching = true">Search
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Project Location</th>
+                    <th>Project Status</th>
+                    <th>Sample Project</th>
+                    <th>Bid Phase</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <!-- <tbody *ngIf="fetching" [appSkeletonTabelLoader]="loaderOptions">
+            </tbody> -->
+            <tbody *ngIf="fetching" class="loader-container">
+                <tr *ngFor="let s of loaderLength">
+                    <td style="width: 320px;">
+                        <div class="skeletion" style="height: 30px; width: 100%;"></div>
+                    </td>
+                    <td style="width: 279px;">
+                        <div class="skeletion" style="height: 30px; width: 74px;"></div>
+                    </td>
+                    <td>
+                        <div class="skeletion" style="height: 30px; width: 60px;"></div>
+                    </td>
+                    <td>
+                        <div class="skeletion" style="height: 30px; width: 60px;"></div>
+                    </td>
+                    <td>
+                        <div class="skeletion" style="height: 30px; width: 60px;"></div>
+                    </td>
+                    <td>
+                        <div class="skeletion" style="height: 30px; width: 80px;"></div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="skeletion" style="height: 30px; width: 55px; margin-right: 12px;"></div>
+                            <div class="skeletion" style="height: 30px; width: 65px;"></div>
+                        </div>
+                        <div class="d-flex flex-column align-items-center mt-2">
+                            <div class="skeletion mb-2" style="height: 30px; width: 117px;"></div>
+                            <div class="skeletion" style="height: 30px; width: 117px;"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="projectList.length > 0 && !fetching">
+                <tr *ngFor="let d of projectList; let i = index" id="row-{{i}}">
+                    <td>
+                        <p>{{d.title}}</p>
+                    </td>
+                    <td>
+                        <p style="width: 114px;"><b>USD</b> {{d.bid_amount}}</p>
+                    </td>
+                    <td>
+                        <p>{{d.project_location}}</p>
+                    </td>
+                    <td class="project-sample-status">
+                        <span *ngIf="d.status == 'active'" class="green">Active</span>
+                        <span *ngIf="d.status == 'inactive'" class="red">Inactive</span>
+                    </td>
+                    <td class="project-sample-status">
+                        <span *ngIf="d.sample_project == 1" class="green">Yes</span>
+                        <span *ngIf="d.sample_project == 0" class="red">No</span>
+                    </td>
+                    <td>{{d.bid_phase}}</td>
+                    <td class="text-center">
+                        <button type="button" class="sm green" (click)="edit(d.id)">Edit</button>
+                        <button type="button" class="sm red" (click)="deletingIndex=i; deletePop=pop; selectedId=d.id" #pop="bs-popover" [popover]="deleteTemplate" placement="left" [outsideClick]="true">Delete
+                        </button>
+                        <br>
+                        <button *ngIf="d.sample_project == 0" type="button" class="sm green" (click)="openSampleConfirmingModal(sampleProjectTemplate,d.id,i)">Mark as Sample
+                        </button>
+                        <br *ngIf="d.sample_project == 0">
+                        <button *ngIf="d.status == 'inactive'" type="button" class="sm green" (click)="statusConfirmingModal(changeProjectStatusTemplate,d.id,i,'active')">Active Project
+                        </button>
+                        <button *ngIf="d.status == 'active'" type="button" class="sm red" (click)="statusConfirmingModal(changeProjectStatusTemplate,d.id,i,'inactive')">Inactive Project
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="projectList.length == 0 && !fetching">
+                <tr>
+                    <td colspan="7">
+                        <app-no-data-found></app-no-data-found>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation example" *ngIf="!fetching">
+        <ul class="pagination justify-content-center  mt-3">
+            <li class="page-item" *ngIf="pagination.prev_page_url != null">
+                <a class="page-link" href="javascript: void(0)" tabindex="-1" (click)="setPagination(page-1)">Previous</a>
+            </li>
+            <li class="page-item disabled" *ngIf="pagination.prev_page_url == null">
+                <a class="page-link" href="javascript: void(0)" tabindex="-1">Previous</a>
+            </li>
+
+            <ng-container *ngFor="let p of [].constructor(pagination.last_page); let i=index">
+                <li [class]="page==(i+1) ? 'page-item active' : 'page-item'">
+                    <a class="page-link" href="javascript: void(0)" (click)="setPagination(i+1)">{{i+1}}</a>
+                </li>
+            </ng-container>
+
+            <li class="page-item" *ngIf="pagination.next_page_url != null">
+                <a class="page-link" href="javascript: void(0)" tabindex="-1" (click)="setPagination(+page+1)">Next</a>
+            </li>
+            <li class="page-item disabled" *ngIf="pagination.next_page_url == null">
+                <a class="page-link" href="javascript: void(0)" tabindex="-1">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<ng-template #deleteTemplate>
+    <p>Are you sure that you want to delete project?</p>
+    <button class="xs black" (click)="deletePop.hide()">No</button>
+    <button [disabled]="waiting.loading" [ngClass]="waiting.loading?'in-progress':''" class="xs red" (click)="delete()">Yes
+        <span></span><span></span><span></span>
+    </button>
+</ng-template>
+
+<ng-template #sampleProjectTemplate>
+    <div class="modal-body text-center">
+        <p>Are you sure that you want to Sample this project?</p>
+        <button class="xs red" (click)="modalRef.hide()">No</button>
+        <button class="xs green" [disabled]="waiting.loading" [ngClass]="waiting.loading?'in-progress':''" (click)="sampleProject()">Yes
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #changeProjectStatusTemplate>
+    <div class="modal-body text-center">
+        <p>Are you sure that you want change the status to {{selectedStatus | titlecase}}?</p>
+        <button class="xs red" (click)="modalRef.hide()">No</button>
+        <button class="xs green" [disabled]="waiting.loading" [ngClass]="waiting.loading?'in-progress':''" (click)="changeProjectStatus()">Yes
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</ng-template>

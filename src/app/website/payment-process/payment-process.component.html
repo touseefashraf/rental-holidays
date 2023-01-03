@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="container box" *ngIf="message == 'success'">
+    <div class="checkMark">&#10004;</div>
+    <div class="heading1">Payment Successful</div>
+    <div class="heading2" *ngIf="downloading == true && !alreadyDownloaded">Downloading Completed</div>
+    <div class="heading2" *ngIf="alreadyDownloaded" style="color: red;">Sorry your file is already downloaded</div>
+    <div class="dotEnimation" *ngIf="downloading != true">
+      <div class="downloadS">Downloading files <br> Please wait</div>
+      <div class="dot one">.</div>
+      <div class="dot two">.</div>
+      <div class="dot three">.</div>  
+      
+
+    </div>
+  </div>
+
+  <div class="container box" *ngIf="message != 'success'">
+    
+    <div class="heading1">Your Checkout is Failed Please try again </div>
+  </div>
+</div>

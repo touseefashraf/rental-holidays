@@ -1,0 +1,51 @@
+<div class="signin-container">
+    <div class="signin-box">
+        <div class="logo-container">
+            <img class="bg-img" src="/assets/img/eldar-nazarov.png" alt="">
+            <div class="logo">
+                <img src="/assets/img/logo-black.png" alt="">
+            </div>
+        </div>
+        <div class="login-container">
+            <div class="login-head">
+                <div class="heading">Login</div>
+            </div>
+            <hr class="h-line">
+            <div class="login-form">
+                <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" #f="ngForm">
+                    <div class="row input-container">
+                        <div class="col-md-12 form-inputs">
+                            <label for="">Email</label>
+                            <input type="text" formControlName="email" class="email" placeholder="Enter Email" [ngClass]="{'form-submitted': f.submitted}"><span class="input-icon"><i class="fas fa-envelope"></i></span>
+                            <div *ngIf="ui.checkErrors(g.email, f)" class="errors">
+                                <p *ngIf="g.email.errors.required">Email is required</p>
+                                <p *ngIf="g.email.errors.email">Please enter valid email</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-inputs">
+                            <label for="" class="pass">Password</label>
+                            <input type="password" formControlName="password" class="password" placeholder="Enter Password" [ngClass]="{'form-submitted': f.submitted}"><span class="input-icon"><i class='fas fa-key'></i></span>
+                            <div *ngIf="ui.checkErrors(g.password, f)" class="errors">
+                                <p *ngIf="g.password.errors.required">Password is required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rememeber-pass">
+                        <p class="remember"><span><i class="fa fa-check"></i></span> Remember Me</p><br>
+                        <a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active" class="forget-pass">Forgot Password?</a>
+                    </div>
+                    <div class="btn-container">
+                        <div class="login-btn-container text-center">
+                            <button [disabled]="loginLoading" class="login-btn" [ngClass]="loginLoading?'in-progress':''">Login
+                                <span></span><span></span><span></span>
+                            </button>
+                        </div>
+                        <div class="footer-container">
+                            <a [routerLink]="['/lender-registration/camper-type']" routerLinkActive="router-link-active" class="create-account">Don’t have a login? <span class="sign-up">Signup</span></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

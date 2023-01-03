@@ -1,0 +1,37 @@
+thead th{
+    background-color: #b19665;
+}
+button:focus{
+outline: none;
+}
+.btn-b{
+    background-color: #c9b084;
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    color: white;
+    margin: 3px;
+    padding: 5px 10px;
+}
+.btn-r{
+    background-color: #c9b084;
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    color: white;
+    margin: 3px;
+    padding: 5px 10px;
+}
+.btn-gr{
+    background-color:gainsboro;
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    color: black;
+    padding: 5px 10px;
+    margin: 3px;
+
+}

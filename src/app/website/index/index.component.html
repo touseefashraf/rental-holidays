@@ -1,0 +1,259 @@
+<div class="header-main">
+    <div class="container">
+        <div class="search-container">
+            <div class="search-wrapper">
+                <h1>Hire motorhome for your vacation</h1>
+            </div>
+            <div class="search-wrapper">
+                <div class="search-inner">
+                    <div class="search-item border-left location">
+                        <div class="ml-2 mr-2">
+                            <i class="fas fa-map-marker-alt icon"></i>
+                        </div>
+                        <div class="item"><span>Location</span><br>
+                            <input type="text" placeholder="Enter a location" #location>
+                        </div>
+                    </div>
+                    <div class="search-item">
+                        <div class="ml-2 mr-2">
+                            <i class="fas fa-calendar-alt icon"></i>
+                        </div>
+                        <div class="item date"><span>Pickup Date</span><br>
+                            <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', adaptivePosition: true }" [minDate]="minDate" placeholder="Select a date" [(ngModel)]="filters.pickup_date" />
+                        </div>
+                        <div class="ml-2 mr-2">
+
+                        </div>
+                        <div class="item"><span>Return Date</span><br>
+                            <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', adaptivePosition: true }" [minDate]="minDate" placeholder="Select a date" [(ngModel)]="filters.return_date" />
+                        </div>
+
+                    </div>
+                    <div class="search-item search-btn-container"><button (click)="search()">Search</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="sharing-container mt-5">
+
+    <div class="sharing-wrapper">
+        <img src="/assets/img/logo.jpg">
+    </div>
+
+    <div class="sharing-item">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZR8IG3UBfmg">
+        </iframe>
+    </div>
+    <div class="sharing-item sharing-right">
+        <h1>SHARING IS CARING</h1>
+        <p>It is a long established fact that a reader will be distracted by the
+            readable content of a page when looking at its layout.
+            The point of using Lorem Ipsum is that it has a more-or-less normal
+            distribution of letters, as opposed to using 'Content here, content here',
+            making it look like readable English. Many desktop publishing packages and
+            web page editors now use Lorem Ipsum as their default model text, and a
+            search for 'lorem ipsum' will uncover many web sites still in their infancy.
+            Various versions have evolved over the years, sometimes by accident,
+            sometimes on purpose (injected humour and the like).
+
+        </p>
+    </div>
+</div>
+
+<div class="sharing-detail">
+    <div class="sharing-detail-item sharing-detail-left">
+        <h1>THE RENTAL HOLIDAYS KODEX</h1>
+        <p>It is a long established fact that a reader will be distracted by the
+            readable content of a page when looking at its layout. </p>
+        <p class="mb-2 sharing-detail-p">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.624" height="20.041" viewBox="0 0 33.624 33.041">
+                <g id="Icon_feather-check-circle" data-name="Icon feather-check-circle" transform="translate(1.503 1.518)">
+                    <path id="Path_3" data-name="Path 3" d="M33,16.62V18A15,15,0,1,1,24.105,4.29" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_4" data-name="Path 4" d="M33,6,18,21.015l-4.5-4.5" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                </g>
+            </svg>
+            Fully comprehensive insurance and breakdown cover
+        </p>
+        <p class="mb-2 sharing-detail-p">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.624" height="20.041" viewBox="0 0 33.624 33.041">
+                <g id="Icon_feather-check-circle" data-name="Icon feather-check-circle" transform="translate(1.503 1.518)">
+                    <path id="Path_3" data-name="Path 3" d="M33,16.62V18A15,15,0,1,1,24.105,4.29" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_4" data-name="Path 4" d="M33,6,18,21.015l-4.5-4.5" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                </g>
+            </svg>
+            Camping Equipment
+        </p>
+        <p class="mb-2 sharing-detail-p">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.624" height="20.041" viewBox="0 0 33.624 33.041">
+                <g id="Icon_feather-check-circle" data-name="Icon feather-check-circle" transform="translate(1.503 1.518)">
+                    <path id="Path_3" data-name="Path 3" d="M33,16.62V18A15,15,0,1,1,24.105,4.29" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_4" data-name="Path 4" d="M33,6,18,21.015l-4.5-4.5" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                </g>
+            </svg>
+            All kilometers agreed with the lessor
+        </p>
+        <p class="mb-2 sharing-detail-p">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.624" height="20.041" viewBox="0 0 33.624 33.041">
+                <g id="Icon_feather-check-circle" data-name="Icon feather-check-circle" transform="translate(1.503 1.518)">
+                    <path id="Path_3" data-name="Path 3" d="M33,16.62V18A15,15,0,1,1,24.105,4.29" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_4" data-name="Path 4" d="M33,6,18,21.015l-4.5-4.5" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                </g>
+            </svg>
+            Prepration
+        </p>
+        <p class="mb-2 sharing-detail-p">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.624" height="20.041" viewBox="0 0 33.624 33.041">
+                <g id="Icon_feather-check-circle" data-name="Icon feather-check-circle" transform="translate(1.503 1.518)">
+                    <path id="Path_3" data-name="Path 3" d="M33,16.62V18A15,15,0,1,1,24.105,4.29" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_4" data-name="Path 4" d="M33,6,18,21.015l-4.5-4.5" transform="translate(-3 -2.991)" fill="none" stroke="#e5dccd" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                </g>
+            </svg>
+            Socail Media
+        </p>
+    </div>
+    <div class="sharing-detail-item">
+        <h1>RENT YOUR DESIRE MOTORHOME UNCOMPLICATED AND BINDING</h1>
+
+        <div class="steps-inner">
+            <div class="steps-item">
+                <img src="/assets/img/note.png" /><br />
+                <br />
+                <b style="color: #fff;">Select & Request</b>
+            </div>
+            <div class="steps-item hide-div">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22">
+                    <path id="Polygon_3" data-name="Polygon 3" d="M11,0,22,13H0Z" transform="translate(13) rotate(90)" fill="#e5dccc" />
+                </svg>
+            </div>
+            <div class="steps-item">
+                <img src="/assets/img/discount.png" /><br />
+                <br />
+                <b style="color: #fff;">Get to know offers</b>
+
+            </div>
+            <div class="steps-item hide-div">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 13 22">
+                    <path id="Polygon_3" data-name="Polygon 3" d="M11,0,22,13H0Z" transform="translate(13) rotate(90)" fill="#e5dccc" />
+                </svg>
+            </div>
+            <div class="steps-item">
+                <img src="/assets/img/van.png" /><br />
+                <br />
+                <b style="color: #fff;">
+                    Book & Enjoy your vacations
+                </b>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="holiday-container">
+    <div class="holiday-wrapper">
+        <div class="holiday-item">
+            <img class="w-100" src="/assets/img/berlin.jpg">
+            <div class="centered">BERLIN</div>
+        </div>
+        <div class="holiday-item">
+            <img class="w-100" src="/assets/img/hamburg.jpg">
+            <div class="centered">HAMBURG</div>
+        </div>
+        <div class="holiday-item">
+            <img class="w-100" src="/assets/img/koln.jpg">
+            <div class="centered">KOLN</div>
+        </div>
+        <div class="holiday-item">
+            <img class="w-100" src="/assets/img/munich.jpg">
+            <div class="centered">MUNCHEN</div>
+        </div>
+
+    </div>
+    <div class="holiday-wrapper p-5">
+        <p>
+            <b>RENTAL HOLIDAYS IS WHERE YOU ARE</b><br>
+            <br>
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+            <br> Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+        </p>
+    </div>
+</div>
+<div class="location-container">
+    <h1 class="location-h1">Other Locations</h1>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+    <div class="location-item"><a href="#">Berlin</a></div>
+</div>
+
+<div class="rental-container">
+    <div class="rental-wrapper">
+        <div class="rental-item">
+            <img src="/assets/img/become-lender.jpg">
+            <div class="rental-centered">
+                <h1><b>With <span>Rental Holidays</span> You Choose Right!</b></h1>
+                <button [routerLink]="['../lender-registration/camper-type']">BECOME A LENDER</button>
+            </div>
+
+            <div class="rental-img-wrapper">
+                <img src="/assets/img/logo.jpg">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="rental-detail">
+    <div class="rental-detail-left">
+        <img src="/assets/img/van-back.jpg">
+    </div>
+    <div class="rental-detail-center">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </div>
+</div>
+
+<div class="about-container mb-5 mt-5">
+    <div class="about-wrapper">
+        <div class="about-item">
+            <img src="/assets/img/hills-new.png">
+            <div class="about-centered">
+                <h1>ABOUT US</h1>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                <button>Read More</button>
+            </div>
+
+            <div class="about-img-wrapper">
+                <img src="/assets/img/logo-black.png">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="question-container" style="margin-top: 85px;">
+    <div class="question-wrapper">
+        <div class="question-item">
+            <img src="/assets/img/question-bg.png">
+            <div class="question-centered">
+                <h1>WHICH QUESTIONS ARE OPEN?</h1>
+                <button>ANSWERS</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

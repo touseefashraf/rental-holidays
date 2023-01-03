@@ -1,0 +1,52 @@
+<div class="headbar">
+    <div>
+        <div>
+            <ul id="progressbar" *ngIf="selectedId== -1">
+                <li [ngClass]="{'active': step == 'projectDetails'}" id="details">
+                    <p>Details</p>
+                </li>
+                <li [ngClass]="{'active': step == 'planHolders'}" id="planHolders">
+                    <p>Plan Holders</p>
+                </li>
+                <li [ngClass]="{'active': step == 'specsDoc'}" id="specsDocument">
+                    <p>Specs Documents</p>
+                </li>
+                <li [ngClass]="{'active': step == 'planDoc'}" id="planDocument">
+                    <p>Plan Documents</p>
+                </li>
+                <li [ngClass]="{'active': step == 'addendumDoc'}" id="addendumDocument">
+                    <p>Addendum Documents</p>
+                </li>
+                <li [ngClass]="{'active': step == 'otherDoc'}" id="otherDocument">
+                    <p> Documents</p>
+                </li>
+                <li [ngClass]="{'active': step == 'qtoDoc'}" id="qtoDocument">
+                    <p>QTO Documents</p>
+                </li>
+            </ul>
+            <ul id="progressbar" *ngIf="selectedId > -1">
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'details'})" [ngClass]="{'active': step == 'projectDetails'}" id="details">
+                    <p>Details</p>
+                </li>
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'planholders'})" [ngClass]="{'active': step == 'planHolders'}" id="planHolders">
+                    <p>Plan Holders</p>
+                </li>
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'spec'})" [ngClass]="{'active': step == 'specsDoc'}" id="specsDocument">
+                    <p>Specs Documents</p>
+                </li>
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'plan'})" [ngClass]="{'active': step == 'planDoc'}" id="planDocument">
+                    <p>Plan Documents</p>
+                </li>
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'addendum'})" [ngClass]="{'active': step == 'addendumDoc'}" id="addendumDocument">
+                    <p>Addendum Documents</p>
+                </li>
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'other'})" [ngClass]="{'active': step == 'otherDoc'}" id="otherDocument">
+                    <p>Other Documents</p>
+                </li>
+                <li (click)="ds.navigateWindow({id:ds.selectedId,step:'qto'})" [ngClass]="{'active': step == 'qtoDoc'}" id="qtoDocument">
+                    <p>QTO Documents</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

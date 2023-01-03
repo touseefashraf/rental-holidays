@@ -1,0 +1,209 @@
+.auth-serachbar {
+    background-color: #454545;
+    padding: 2% 5%;
+}
+.auth-serachbar select {
+    padding: 12px 20px;
+    width: 47%;
+    margin-right: 20px;
+    color: #ffffff;
+    background-color: #454545;
+}
+.serach-header {
+    background-color: var(--iprimary);
+    padding: 15px 30px;
+}
+.adjust-width-first {
+    width: 23%;
+}
+.adjust-width-second {
+    width: 23%;
+}
+.p-heading {
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
+p {
+    margin: 0px;
+}
+.input-holder-custom {
+    margin-top: 10px;
+}
+.input-holder-custom input,
+.input-holder-custom input:active {
+    border-radius: 5px;
+    padding: 13px 10px;
+    width: 100%;
+    border: none;
+}
+.input-holder-custom select,
+.input-holder-custom select:active {
+    width: 100%;
+    border-radius: 5px;
+    padding: 13px 10px;
+    border: 1px solid white;
+    background-color: var(--iprimary);
+    color: white;
+}
+
+.input-holder-custom select option {
+    color: white;
+}
+.buttons-custom-container {
+    margin-top: 32px;
+}
+.buttons-custom-container .buttons-custom-holder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-icon {
+    font-size: 18px;
+    color: white;
+    margin-right: 10px;
+}
+
+.search-btn-icon {
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 800;
+}
+.orange p {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.filter-btn {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    background-color: #2f649a;
+    border: 1px solid #2f649a;
+    border-radius: 5px;
+    padding: 7px 5px;
+}
+
+.filter-btn .filter {
+    margin-right: 12px;
+}
+.adjust-width-second {
+    background-color: #18548f !important;
+    padding: 5px 19px 19px 19px;
+    border-radius: 6px;
+    width: 23%;
+}
+.adjust-width-second .from-to-holder input {
+    width: 45%;
+}
+.adjust-width-second-select {
+    width: 23%;
+}
+
+.adjust-width-second-select select {
+    width: 100%;
+    border-radius: 5px;
+    padding: 13px 10px;
+    border: 1px solid white;
+    background-color: var(--iprimary);
+    color: white;
+}
+
+.row-filters {
+    /* padding: 0px 15px; */
+}
+
+.from-to-holder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+.from-to-holder p {
+    color: #ffffff;
+}
+
+.from-to-holder input {
+    background-color: var(--iprimary);
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 13px 10px;
+    width: 136px;
+}
+.from-to-holder input::placeholder {
+    color: white;
+}
+.row-filters select {
+    background-color: var(--iprimary);
+    color: #ffffff;
+    width: 100%;
+    padding: 13px 10px;
+    border-radius: 5px;
+}
+.card-holder {
+    margin-top: 1%;
+    margin-bottom: 4%;
+    min-height: 450px;
+}
+.card-holder .card {
+    padding: 18px 16px;
+    min-width: 94%;
+    border: none;
+    margin-bottom: 12px;
+}
+
+.des {
+    margin: 15px 0px;
+    font-size: 18px;
+}
+.card-colored {
+    background-color: #ecf0f3;
+}
+
+/* blue bar */
+.skeletion {
+   
+    width: 100%;
+    background: #D8DBDE;
+    z-index: 0;
+    position: relative;
+    border-radius: 0px;
+}
+
+/* Shine */
+.skeletion:after {
+    content: "";
+    transform: translateX(100%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    animation: slide 1.0s infinite 0s;
+
+    /* 
+    CSS Gradient - complete browser support from http://www.colorzilla.com/gradient-editor/ 
+    */
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(50%, rgba(255, 255, 255, 0.8)), color-stop(99%, rgba(128, 186, 232, 0)), color-stop(100%, rgba(125, 185, 232, 0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 */
+}
+
+/* animation */
+
+@keyframes slide {
+    0% {
+        transform: translateX(-10%);
+    }
+    100% {
+        transform: translateX(10%);
+    }
+}

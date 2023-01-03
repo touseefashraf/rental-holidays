@@ -1,0 +1,138 @@
+<div class="main-container">
+    <app-steps-template [step]="'planHolders'"></app-steps-template>
+    <ng-container *ngIf="!dataService.planholderFetching">
+        <div class="d-flex align-items-end justify-content-end">
+            <div class="d-flex flex-column">
+                <label>Bid Phase</label>
+                <!-- <select class="fadeIn" [(ngModel)]="dataService.bidPhase">
+                    <option disabled [value]="null">Select Option</option>
+                    <option [disabled]="dataService.projectDetails.bid_phase !== 'open'" value="open">Open</option>
+                    <option [disabled]="dataService.projectDetails.bid_phase == 'awarded' || dataService.projectDetails.bid_phase == 'open'" value="awarded">Awarded</option>
+                    <option [disabled]="dataService.projectDetails.bid_phase == 'awarded'" value="bid_results">Bid Result</option>
+                </select>  Thi sis old with disbaled functionality -->
+                <select class="fadeIn" [(ngModel)]="dataService.bidPhase">
+                    <option disabled [value]="null">Select Option</option>
+                    <option value="open">Open</option>
+                    <option value="awarded">Awarded</option>
+                    <option value="bid_results">Bid Result</option>
+                </select>
+            </div>
+            <button (click)="openPlanHoldersModal(planholdersTemplate)" type="button" class="sm green">Add <ng-container *ngIf="dataService.planHoldersList.project_plan_holders.length !== 0">more </ng-container>
+                Plan Holders</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <!-- <th>Select</th> -->
+                        <th>Plan Holder</th>
+                        <th *ngIf="dataService.bidPhase !== 'open'">Price</th>
+                        <th class="col-actions">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="dataService.planHoldersList.project_plan_holders.length > 0">
+                    <tr *ngFor="let d of dataService.planHoldersList.project_plan_holders; let i = index">
+                        <!-- <td class="plan-holder-checkbox">
+                                    <input type="checkbox" [checked]="checkphId(d.id)" [id]="'ph-'+d.id" [name]="'ph-'+i+d.name" [value]="d.id" (change)="spliceAddPlanholdersIds(d.id)">
+                                    <label [for]="'ph-'+d.id"></label><br>
+                                </td> -->
+                        <td>
+                            <ng-container *ngIf="d.plan_holder">
+                                {{ d.plan_holder.company_name }}
+                            </ng-container>
+                        </td>
+                        <td *ngIf="dataService.bidPhase !== 'open'"><input type="number" min="0" [(ngModel)]="dataService.planholdersDataToSend[i].price" [ngModelOptions]="{standalone: true}" name="" id=""></td>
+                        <td>
+                            <div class="d-flex">
+                                <ng-container *ngIf="dataService.bidPhase == 'awarded'">
+                                    <button type="button" (click)="awardProject(d,i)" class="sm green" *ngIf="d.awarded == 0;else awarded">Award</button>
+                                    <ng-template #awarded>
+                                        <button type="button" class="sm green">Awarded</button>
+                                    </ng-template>
+                                </ng-container>
+                                <button type="button" class="sm red" (click)="selectedIndex=i;deletePop=pop" #pop="bs-popover" [popover]="removeRowTemplate" placement="left" [outsideClick]="true">Remove</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="dataService.planHoldersList.project_plan_holders.length == 0">
+                    <tr>
+                        <td colspan="3">
+                            <app-no-data-found></app-no-data-found>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex align-items-center">
+            <button type="button" class="sm red" (click)="dataService.navigateWindow({id:dataService.selectedId,step:'details'})">Back</button>
+            <button [disabled]="isLoading" [ngClass]="isLoading? 'in-progress' : ''" type="button" class="sm green" (click)="saveData()">Save & Next <i class="fas fa-arrow-right f-10 ml-2"></i>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </ng-container>
+</div>
+<ng-template #removeRowTemplate>
+    <p>Are you sure to remove?</p>
+    <button class="xs black" type="button" (click)="deletePop.hide()">No</button>
+    <button class="xs red" (click)="removeRow()">Yes</button>
+</ng-template>
+
+<ng-template #planholdersTemplate>
+    <div class="modal-header">
+        <div class="d-flex align-items-end">
+            <div class="d-flex flex-column">
+                <h3>Search</h3>
+                <input type="text" name="" id="44" placeholder="Search" [(ngModel)]="searchText">
+            </div>
+            <button *ngIf="multiplePlanholdersToAddInForm.length > 0" type="button" class="green sm" (click)="addSelectedMultipleIdsInForm()">Add Selected</button>
+        </div>
+    </div>
+    <div class="modal-body" style="height: 350px;overflow-y: scroll;">
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Plan Holder</th>
+                        <!-- <th>Price</th> -->
+                        <th class="col-actions">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="dataService.planHoldersList.plan_holders.length > 0">
+                    <tr *ngFor="let d of dataService.planHoldersList.plan_holders | filter : searchText; let i = index">
+                        <td class="plan-holder-checkbox">
+                            <input type="checkbox" [id]="'addMore-'+d.id" [name]="'addMore-'+i+d.name" [value]="d.id" (change)="spliceAddPlanholdersIds(d)">
+                            <label [for]="'addMore-'+d.id"></label><br>
+                        </td>
+                        <td>
+                            {{ d.company_name }}
+                        </td>
+                        <!-- <td><input type="number" min="0" [(ngModel)]="dataService.planholdersDataToSend[i].price" [ngModelOptions]="{standalone: true}" name="" id=""></td> -->
+                        <td>
+                            <div class="d-flex">
+                                <button class="green sm" (click)="addMorePlanHolders(d)">Add</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="pipe.transform(dataService.planHoldersList.plan_holders,searchText).length == 0">
+                    <tr>
+                        <td colspan="3">
+                            <app-no-data-found></app-no-data-found>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="d-flex justify-content-end">
+            <button class="red sm" (click)="modalRef.hide();multiplePlanholdersToAddInForm = []">Cancel</button>
+        </div>
+    </div>
+</ng-template>

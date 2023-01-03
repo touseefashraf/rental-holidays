@@ -1,0 +1,61 @@
+<div class="container m-container">
+    <hr>
+    <div class="row">
+        <div class="detail-body">
+            <div class="detail-text">
+                <p>YOUR CAMPER DETAILS</p>
+                <p>Let Your Tenants Know which vehical they will be travelling with</p>
+            </div>
+            <form class="form-group" [formGroup]="camperDetailsForm" (ngSubmit)="save(camperDetailsForm, f)" #f="ngForm">
+                <div class="inner-detail">
+                    <div>
+                        <label for="">Make</label>
+                        <input formControlName="make" class="form-control" placeholder="Make" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.make, f)" class="errors">
+                            <p *ngIf="g.make.errors.required">Make is required</p>
+                            <p *ngIf="g.make.errors.maxlength">Make should be maximum {{ g.make.errors.maxlength.requiredLength }} charaters</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="">Modal</label>
+                        <input formControlName="model" class="form-control" placeholder="Modal" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.model, f)" class="errors">
+                            <p *ngIf="g.model.errors.required">Model is required</p>
+                            <p *ngIf="g.model.errors.maxlength">Model should be maximum {{ g.model.errors.maxlength.requiredLength }} charaters</p>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <label for="">Permitter total weight</label>
+                        <input formControlName="allowed_weight" class="weight-input" placeholder="Weight" type="number" [ngClass]="{'form-submitted': f.submitted}"><span style="margin-left:-25px;">kg</span>
+                        <div *ngIf="ui.checkErrors(g.allowed_weight, f)" class="errors">
+                            <p *ngIf="g.allowed_weight.errors.required">Weight is required</p>
+                            <p *ngIf="g.allowed_weight.errors.maxlength">Weight should be maximum {{ g.make.errors.maxlength.requiredLength }} charaters</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="">Number of Sleeping spaces</label>
+                        <select formControlName="no_beds" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value="0">-----</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="ui.checkErrors(g.no_beds, f)" class="errors">
+                            <p *ngIf="g.no_beds.errors.required">Sleeping spaces is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foot">
+                    <button disabled class="disabled" [routerLink]="['../camper-type']">Back</button>
+                    <button>Next</button>
+                </div>
+            </form>
+        </div>
+        <!-- <div class="foot">
+            <button>Back</button>
+            <button [routerLink]="['../camper-profile']">Next</button>
+        </div> -->
+    </div>
+</div>

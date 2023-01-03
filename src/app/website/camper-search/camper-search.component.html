@@ -1,0 +1,146 @@
+<div class="headerBg">
+    <div class="container">
+        <div class="search-container">
+            <div class="search-wrapper">
+                <div class="search-inner">
+                    <div class="search-item border-left location">
+                        <div class="ml-3 mr-3">
+                            <span><i class="fas fa-map-marker-alt icon"></i></span>
+                        </div>
+                        <div class="item"><span>Location</span><br>
+                            <input type="text" placeholder="Enter a location" #location [(ngModel)]="locationString">
+
+                        </div>
+                    </div>
+                    <div class="search-item">
+                        <div class="ml-3 mr-3">
+                            <i class="fas fa-calendar-alt icon"></i>
+                        </div>
+                        <div class="item date"><span>Pickup Date</span><br>
+                            <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',adaptivePosition: true }" [minDate]="minDate" placeholder="Select a date" [(ngModel)]="filters.pickup_date" />
+                        </div>
+                        <div class="ml-3 mr-3">
+                        </div>
+                        <div class="item"><span>Return Date</span><br>
+                            <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',adaptivePosition: true }" [minDate]="minDate" placeholder="Select a date" [(ngModel)]="filters.return_date" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="filter-wraper">
+        <div class="filterLabel">
+            Filters
+        </div>
+        <div class="filters">
+            <div class="filterCover">
+                <select [(ngModel)]="filters.vehicle_type_id">
+                    <option value="">Body Style</option>
+                    <option *ngFor="let v of vehicleTypeslist" [value]="v.id">{{v.title}}</option>
+                </select>
+            </div>
+            <div class="filterCover">
+                <select [(ngModel)]="filters.amenity_id">
+                    <option value="">Features</option>
+                    <option *ngFor="let f of featureslist" [value]="f.id">{{f.title_en}}</option>
+                </select>
+            </div>
+            <div class="filterCover">
+                <input class="filter-price" type="number" min="0" placeholder="Price" [(ngModel)]="filters.price_per_night">
+            </div>
+            <div class="filterCover">
+                <select [(ngModel)]="filters.no_beds">
+                    <option value="">Beds</option>
+                    <ng-container *ngFor="let b of beds">
+                        <option [value]="b">{{ b }}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="filterCover">
+                <select [(ngModel)]="filters.no_seats">
+                    <option value="">Seats</option>
+                    <ng-container *ngFor="let s of seats">
+                        <option [value]="s">{{ s }}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="filterCover">
+                <select [(ngModel)]="filters.radius">
+                    <option value="">Distance</option>
+                    <ng-container *ngFor="let d of distance">
+                        <option [value]="d">{{ d }}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="filterCoverSearchBtn">
+                <button (click)="search()">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="availablity-cover mt-3">
+        <p>AVAILABLE MOTORHOMES &nbsp; &nbsp; &nbsp;
+            <span *ngIf="totalVehicles == null; else totalVehicle"> 0 </span>
+            <ng-template #totalVehicle>
+                <span *ngIf="totalVehicles == 0">0</span>
+                <span *ngIf="totalVehicles > 1">1 - {{ totalVehicles }}</span>
+            </ng-template>
+
+        </p>
+    </div>
+
+    <div class="motors-wrapper">
+        <ng-container *ngFor="let vs of vehiclesSearchList; let i = index">
+            <div class="motor-cover">
+                <div class="motor-img">
+                    <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.ImageUrl(vs.id)" (click)="searchDetail(vs.id)">
+                </div>
+                <div class="col-md-12 info-cover">
+                    <div class="motor-title">
+                        <p style="margin: 0;">{{vs.vehicle_type.title}} <span>{{vs.price_per_night}} &euro;</span></p>
+                    </div>
+                    <div class="per-night">
+                        <div class="beds">
+                            <i class="fas fa-user"></i>
+                            <p>{{vs.no_seats}}</p>
+                            <i class="fas fa-bed"></i>
+                            <p>{{vs.no_beds}}</p>
+                        </div>
+                        <p>PER NIGHT</p>
+                    </div>
+                    <div class="motor-price">
+                        <div><i style="color: #c9b084;font-size: 16px;" class="fas fa-map-marker-alt"></i> {{vs.location}}, {{vs.registration_country}}</div>
+                    </div>
+                </div>
+                <div class="col-md-12 owner">
+                    <div class="owner-img">
+                        <!-- <img src="/assets/img/Untitle-user.png"> -->
+                        <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.profileImageUrl(vs.user.id)">
+                    </div>
+                    <div class="owner-info">
+                        <ng-container *ngIf="vs.user.first_name == null; else user">
+                            Unknown
+                        </ng-container>
+                        <ng-template #user>
+                            {{vs.user.first_name}} {{vs.user.last_name}}
+                        </ng-template>
+                        <br>
+                        <ng-container *ngIf="vs.user.landlord.verified == 0 ; else verifiedUser">
+                            <span> </span>
+                        </ng-container>
+                        <ng-template  #verifiedUser>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15.133" height="19.385" viewBox="0 0 19.133 23.385">
+                                    <path id="Icon_material-verified-user" data-name="Icon material-verified-user" d="M14.067,1.5,4.5,5.752V12.13c0,5.9,4.082,11.416,9.567,12.756,5.485-1.339,9.567-6.856,9.567-12.756V5.752ZM11.941,18.507,7.689,14.256l1.5-1.5L11.941,15.5l7-7L20.444,10Z" transform="translate(-4.5 -1.5)" fill="#bfa16c" />
+                                </svg>
+                                <span>Verified by <span style="color: #bfa16c;font-weight: bold;">Rental Holidays</span></span>
+
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

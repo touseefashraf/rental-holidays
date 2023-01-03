@@ -1,0 +1,429 @@
+section.headerBanner {
+    background-color: transparent;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+
+    /* background: rgb(190, 160, 108);
+    background: -moz-linear-gradient(0deg, rgba(190, 160, 108, 1) 0%, rgba(138, 116, 77, 1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(190, 160, 108, 1) 0%, rgba(138, 116, 77, 1) 100%);
+    background: linear-gradient(0deg, rgba(190, 160, 108, 1) 0%, rgba(138, 116, 77, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bea06c",endColorstr="#8a744d",GradientType=1); */
+}
+.header-main {
+    margin: 0;
+    background-image: url("/assets/images/home-banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.header-item a {
+    margin: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.head-btn {
+    display: inline-block;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+.black .header-item a {
+    color: #000;
+}
+
+.white .header-item a {
+    color: #fff;
+}
+
+.black .head-btn {
+    border: solid 1px #000;
+}
+.white .head-btn {
+    border: solid 1px #fff;
+}
+
+.hide-btn {
+    display: none;
+}
+
+.show-btn {
+    display: block;
+}
+
+.logo-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* background: #fff;
+    padding-top: 28px;*/
+    width: 110px;
+    /*border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: 1px solid #ccc;*/
+}
+
+.logo-wrapper img {
+    border-radius: 50%;
+    /* width: 84px;
+    height: 84px; */
+    width: 110px;
+    margin-top: 10px;
+}
+.lang-dropdown {
+    margin: 10px;
+}
+.search-container {
+    padding-top: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+.search-wrapper {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: self-end;
+    margin: auto;
+    padding-bottom: 10px;
+}
+.search-wrapper h1 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 400;
+}
+.search-inner {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    background: white;
+    border: 1px solid #ad9262;
+    padding: 5px 0;
+    border-radius: 7px;
+}
+.search-item {
+    width: 50%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.item {
+    width: calc(100% - 10px);
+}
+.item span {
+    font-weight: bold;
+}
+.item input {
+    width: 85%;
+    border: none;
+}
+.item input::placeholder {
+    color: #000;
+}
+.location::after {
+    content: " ";
+    background: #ccc;
+    margin: 5px 0px;
+    width: 1px;
+    height: 26px;
+    position: absolute;
+    right: 0px;
+}
+.search-item.location {
+    position: relative;
+}
+
+.date::after {
+    content: " ";
+    background: #ccc;
+    margin: -4px 0px;
+    width: 1px;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+}
+.item.date {
+    position: relative;
+}
+.border-left {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.icon {
+    color: #bfa16c;
+}
+.search-btn-container button {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: #bfa16c;
+    border-radius: 0px;
+}
+@media only screen and (max-width: 768px) {
+    .hide-btn {
+        display: block;
+    }
+    .show-btn {
+        display: none;
+    }
+    .header-item a {
+        width: 220px;
+    }
+    .search-wrapper {
+        width: 98%;
+    }
+}
+@media only screen and (max-width: 528px) {
+    .search-container {
+
+
+        padding-top: 150px;
+        padding-bottom: 20px;
+    }
+    .motor-cover {
+        width: 80% !important;
+
+    }
+    .search-wrapper {
+        width: 100%;
+    }
+    .search-wrapper h1 {
+        font-size: 20px;
+    }
+    .search-inner {
+        flex-wrap: wrap;
+    }
+    .search-item {
+        width: 100%;
+        margin-bottom: 2px;
+    }
+    .border-left {
+        border-radius: 0px;
+    }
+}
+.headerBg {
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 15%,
+        rgba(187, 158, 106, 1) 15%,
+        rgba(138, 116, 79, 1) 100%
+    );
+    background: -webkit-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 15%,
+        rgba(187, 158, 106, 1) 15%,
+        rgba(138, 116, 79, 1) 100%
+    );
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 15%,
+        rgba(187, 158, 106, 1) 15%,
+        rgba(138, 116, 79, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#8a744f",GradientType=1);
+}
+.search-item i {
+    font-size: 20px;
+}
+
+.filter-wraper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /* align-items: center; */
+}
+
+.filterLabel {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 5px 2% 0 0;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.filterCover {
+    margin-right: 3%;
+}
+.filterCover select {
+    padding: 6px 5px;
+    border-radius: 5px;
+    border: 1px solid #525252;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+}
+
+.filterCover .filter-price {
+    height: 38px;
+    width: 100px;
+    padding: 6px 5px;
+    border-radius: 5px;
+    border: 1px solid #525252;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.filterCover > input::placeholder {
+    color: #000;
+}
+
+.filterCoverSearchBtn button {
+    background: #bfa16c;
+    border-radius: 5px;
+    padding: 8px 40px;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.availablity-cover span {
+    color: #bfa16c;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.motors-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.motor-cover {
+    width: 250px;
+    /* margin-right: 3%; */
+    /* flex-grow: 1; */
+    border: 1px solid gray;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 30px;
+    position: relative;
+}
+
+.motor-cover img {
+    width: 100%;
+}
+.motor-img {
+    position: relative;
+    cursor: pointer;
+}
+.per-night{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.per-night p{
+    font-size: 12px;
+    margin: 0;
+    color: gray;
+    font-weight: bold;
+}
+.ver{
+
+
+
+}
+.motor-img::after {
+    content: " ";
+    position: absolute;
+    right: -2px;
+    bottom: -15px;
+    width: calc(100% + 2px);
+    height: 30px;
+    background: white;
+    transform: rotate(-2deg);
+}
+.info-cover {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0 8px;
+    margin-bottom: 100px;
+}
+.motor-title {
+    width: 100%;
+    padding-top: 10px;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.motor-title span {
+    color: #525252;
+    font-size: 23px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: -28px 0 0 0;
+}
+
+.motor-price {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.motor-price span {
+    font-size: 12px;
+    font-weight: normal;
+    color: #525252;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: -19px 0 0 0;
+}
+
+.beds {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(141, 141, 141);
+    margin: 10px 0;
+    font-size: 16px;
+}
+.beds p {
+    margin: 0 15px 0 5px;
+}
+.owner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    padding: 5px 6px 15px;
+    position: absolute;
+    bottom: 0;
+    margin-top: 50px;
+}
+.owner-img {
+    width: 20%;
+}
+.owner-img img {
+    padding: 5px;
+    border-right: 1px solid #bfa16c;
+    width: 50px;
+}
+.owner-info {
+    width: 100%;
+    padding: 1px 2px;
+
+}
+
+.owner-info > span {
+    color: #bfa16c;
+    line-height: 2;
+    font-size: 13px;
+    padding-left: 4px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .filters {
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,125 @@
+<!-- <p>
+  booking-request works!
+</p> -->
+<div *ngIf="dataStatus == 'fetching'" class="d-flex justify-content-center align-item-center">
+    <img src="/assets/images/spinner.svg" style="width: 100px; margin-top:8%;margin-bottom:8%;">
+</div>
+<div *ngIf="dataStatus == 'done'">
+    <h3> Booking requests:</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Camper Title</th>
+                <th>Booked by</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Contact</th>
+                <th>Price</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <ng-container>
+            <tbody *ngIf="myBooking.length > 0; else noDataFound">
+                <tr *ngFor="let d of myBooking; let i = index">
+                    <td>{{d.landlord_vehicle.title }} </td>
+                    <td>{{d.tenant.user.first_name }} {{d.tenant.user.last_name }} </td>
+                    <td>{{d.start_date | date:'longDate' }} </td>
+                    <td>{{d.end_date | date:'longDate' }} </td>
+                    <td>{{d.tenant.user.contact }} </td>
+                    <td>{{d.price}} </td>
+                    <!-- <td>
+                    <span *ngIf="d.status=='pending'" class="i-badge yellow sm status">{{d.status}}</span>
+
+                </td> -->
+                    <td class="d-flex justify-content-center align-content-center">
+                        <ng-container *ngIf="d.status == 'pending'">
+                            <button type="button" class="btn-b" (click)="openModal(approve,i)">Approve</button>
+                            <button type="button" class="btn-r" (click)="openModalReject(reject,i)">Reject</button>
+                            <button type="button" class="btn-gr" (click)="confirmingModal(confirming, d.id,i)">Cancel</button>
+                        </ng-container>
+                        <!-- <div *ngIf="d.status == 'rejected'" class="px-3">
+                        <i class="fa fa-trash"></i>
+                    </div> -->
+                        <span *ngIf="d.status=='approved'" class="i-badge green md status">{{d.status}}</span>
+                        <span *ngIf="d.status=='rejected'" class="i-badge red md status">{{d.status}}</span>
+                        <span *ngIf="d.status=='CBT'" class="i-badge black md status">Cancelled by Tenant</span>
+                        <span *ngIf="d.status=='CBL'" class="i-badge gray md status">Cancelled by Me</span>
+                    </td>
+                </tr>
+            </tbody>
+            <ng-template #noDataFound>
+                <tbody>
+                    <tr>
+                        <td colspan="12">
+                            <app-no-data-found></app-no-data-found>
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </ng-container>
+    </table>
+</div>
+<ng-template #approve>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Approve Booking Request</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="acceptForm" #f="ngForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label class="mb-0">Remarks <span class="mendatory">*</span></label>
+                            <textarea rows="3" formControlName="response_note" autocomplete="off" class="form-control mt-0" placeholder="Approval Remarks" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <button type="submit" appSmartClick (smartClick)="approveRequest(f)" class="btn-b" [disabled]="Loading" [ngClass]="Loading?'in-progress':''">Approve
+                    <span></span><span></span><span></span>
+                </button>
+                <button type="button" class="btn-gr" (click)="cancelButton(f)">Cancel</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<ng-template #reject>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Reject Booking Request</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="rejectForm" #f="ngForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12 mb-1">
+                            <label class="mb-0">Reason <span class="mendatory">*</span></label>
+                            <textarea rows="3" formControlName="response_note" autocomplete="off" class="form-control mt-0" placeholder="Reject Reason" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <button type="submit" appSmartClick (smartClick)="rejectRequest(f)" class="btn-b" [disabled]="Loading" [ngClass]="Loading?'in-progress':''">Reject
+                    <span></span><span></span><span></span>
+                </button>
+                <button type="button" class="btn-gr" (click)="cancelButton(f)">Cancel</button>
+
+            </div>
+
+        </form>
+    </div>
+</ng-template>
+<ng-template #confirming>
+    <div class="modal-body text-center">
+        <p>Do you want to Cancel?</p>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn-gr" (click)="modalRef.hide()">No</button>
+            <button type="button" class="btn-r" (click)="cancel()" [disabled]="Loading" [ngClass]="Loading?'in-progress':''">Yes
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</ng-template>

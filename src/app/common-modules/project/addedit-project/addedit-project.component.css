@@ -1,0 +1,62 @@
+.price {
+    font-weight: bold;
+    color: var(--ap-blue);
+    font-size: 18px !important;
+    text-align: right;
+}
+
+.poa {
+    margin: 5px 1px;
+    border-radius: 0px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.time-custom table{
+    border: none;
+}
+.tc{
+    color: red;
+
+}
+/* .plan-holder-checkbox input{
+    position: initial;
+} */
+input[type=checkbox] {
+   margin-right: 10px;
+   margin-top: -5px;
+}
+input[type="text"], input[type="date"], input[type="number"], textarea, input[type="email"], input[type="file"], input[type="password"], select {
+    width: 100%;
+    border: 1px solid #E0E0DB;
+    border-radius: 3px;
+    padding: 8px 10px;
+    font-size: 14px;
+    margin: 5px 0px;
+}
+
+label{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.marker {
+    cursor:pointer; line-height: 0.8; color:red; margin-left:6px;
+    margin: 0px;
+}
+.loc-marker{
+    flex-wrap: nowrap;
+}
+
+.loc-marker input{
+    width: 87%;
+    margin: 0px;
+}
+
+.loc-marker a{
+    width: 6%;
+    
+}

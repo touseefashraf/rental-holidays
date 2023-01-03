@@ -1,0 +1,132 @@
+.m-container {
+    position: relative;
+    width: 80%;
+    height: auto;
+    margin: 0px auto;
+    /* border: 1px solid black; */
+    box-shadow: 0px 0px 30px 0.1px rgb(182, 182, 182);
+    padding-top: 110px;
+    background-color: white;
+}
+.head {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(189, 189, 189);
+}
+.head img {
+    width: 100px;
+    padding: 5px;
+}
+.detail-body {
+    /* width: 50%;
+    margin: 20px auto; */
+    width: 100%;
+    margin: 20px auto 0;
+}
+
+.detail-text,
+.inner-detail {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.detail-body .detail-text > p:nth-child(1) {
+    font-size: 18px;
+    font-weight: bold;
+}
+.detail-body .detail-text > p:nth-child(2) {
+    font-size: 12px;
+    font-weight: 700;
+}
+.detail-body label {
+    font-weight: 900;
+}
+.detail-body input,
+select {
+    background-color: #f7f5f0;
+}
+.detail-body select {
+    width: 50%;
+}
+.foot {
+    /* position: absolute;
+    bottom: 0; */
+    background-color: #f7f5f0;
+    height: 100px;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0px 10px; */
+    margin: 36px 0 -16px 0;
+}
+
+.foot button:nth-child(1) {
+    background-color: #f7f5f0;
+    border: 2px solid #c9b084;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: #c9b084;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.foot button:nth-child(2) {
+    background-color: #c9b084;
+    border: none;
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.weight-input {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    padding-right: 25px;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+select:focus,
+input:focus,
+.uneditable-input:focus {
+    border-color: #c9b084;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #c9b084;
+    outline: 0 none;
+}
+select option {
+    margin: 40px;
+    background: #c9b084;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.disabled{
+    background-color: rgb(202, 202, 202) !important;
+}
+button:focus {outline:0;}
+
+@media only screen and (max-width: 528px) {
+    .detail-body {
+        width: 100%;
+    }
+    .m-container {
+        width: 90%;
+    }
+
+    .detail-text,
+    .inner-detail {
+        width: 85%;
+    }
+}

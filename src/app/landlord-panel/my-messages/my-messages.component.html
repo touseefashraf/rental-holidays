@@ -1,0 +1,117 @@
+<!-- <p>
+  my-messages works!
+</p> -->
+<main>
+    <div class="container">
+        <h3>Messages</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="200px">From</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th style="width: 200px; text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td>Muhammad Qasim</td>
+                    <td>Hello sir</td>
+                    <td>25/12/2020</td>
+                    <td>
+                        <div class="text-center">
+                            <button class="btn-r" (click)="openMessage(messageTemplate)">View</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <ng-template #noDataFound>
+                <tbody>
+                    <tr>
+                        <td colspan="4">
+                            <div class="no-data-wrapper">
+                                <h1>No Data Found</h1>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+    </div>
+</main>
+
+<ng-template #messageTemplate>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4>From: Ali</h4>
+            </div>
+            <div class="col-md-12 mt-1">
+                <div class="row message-log">
+                    <ng-container >
+                        <div class="message-container" >
+                            <div  class="first-message-margin"></div>
+                            <div [class]="this.loggedInId? 'chat-container-active show-custom-hide' : 'chat-container-inactive show-custom-hide'">
+                                <!-- <div class="hide-custom" >
+                                    <input type="checkbox" (click)="chechkIds(log.id)">
+                                </div>
+                                <div class="float-left mr-3 hide-custom" >
+                                    <i class="fa fa-trash mt-2" aria-hidden="true" ></i>
+                                </div> -->
+                                <div class="text-right" style="width: 88%;" >
+                                    hello sir
+                                </div>
+                                <div class="text-left" style="width: 88%;" >
+                                    how are you?
+                                </div>
+
+                                <!-- <div class="float-right hide-custom" >
+                                    <i class="fa fa-trash  mt-2 ml-3" aria-hidden="true" ></i>
+                                </div>
+                                <div class="hide-custom" >
+                                    <input class="ml-1" type="checkbox" (click)="chechkIds(log.id)">
+                                </div> -->
+
+                                <br>
+                            </div>
+                            <div [class]="this.loggedInId? 'chat-container-active show-custom-hide' : 'chat-container-inactive show-custom-hide'">
+                                12/12/2020
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <form class="w-100" [formGroup]="messageForm" (ngSubmit)="sendMessage(messageForm, r)" #r="ngForm">
+                <div class="col-md-12 text-right mt-2">
+                    <textarea class="form-control mt-1 message" formControlName="description" placeholder="Message"></textarea>
+                    <div *ngIf="ui.checkErrors(g.description, r)" class="errors">
+                        <p *ngIf="g.description.errors.required">{{'website.tutor.msg.msgReq' }}</p>
+                        <p *ngIf="g.description.errors.maxlength">{{'website.tutor.msg.message' }}
+                            {{ g.description.errors.maxlength.requiredLength }} {{'website.tutor.msg.chars'}}</p>
+                    </div>
+                </div>
+                <div class="col-md-12 text-right mt-2">
+                    <!-- <button type="button" class="mr-1 button-close" (click)="deleteArrayIds()">{{'website.tutor.msg.delete'}} Selected</button> -->
+                    <button type="button" class="btn-gr" (click)="cancel(r)">Close</button>
+                    <button type="submit" class="btn-r">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<!-- <ng-template #messageConfirming>
+    <div class="modal-body text-center">
+        <p>{{'website.tutor.msg.sure' }}</p>
+        <button type="button" class="lr-major sm" (click)="deleteMsg()">{{'website.tutor.msg.yes' }}</button>
+        <button type="button" class="lr-minor sm" (click)="modalRef.hide()">{{'website.tutor.msg.no' }}</button>
+    </div>
+</ng-template> -->
+
+<!-- <ng-template #detailConfirming>
+    <div class="modal-body text-center">
+        <p>{{'website.student.msg.sure' }}</p>
+        <button type="button" class="lr-major sm" (click)="deleteDetailMsg()">{{'website.student.msg.yes' }}</button>
+        <button type="button" class="lr-minor sm" (click)="modalRefConfirm.hide()">{{'website.student.msg.no'}}</button>
+    </div>
+</ng-template> -->

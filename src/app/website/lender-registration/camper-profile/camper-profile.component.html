@@ -1,0 +1,107 @@
+<!-- <p>
+  camper-details works!
+</p> -->
+<div class="m-container">
+    <!-- <div class="head">
+        <img src="/assets/img/logo.jpg" alt="">
+    </div> -->
+    <hr>
+    <div class="detail-body">
+        <input type="file" style="display: none;" id="other-images" (change)="onImagesChange($event)" multiple>
+        <p>YOUR CAMPER Profile</p>
+        <p>Show us your Camper Beauty</p>
+        <div class="upload-thumbnail">
+            <div class="image_uploader signup_img">
+                <label for="file_upload" class="custom_file_upload">
+                    <img id="banner-img" [src]="thumbnail" style="width: 258px; height: 162px;">
+                    <span (click)="browseThumbnail($event)">Upload Image</span>
+                </label>
+                <input type="file" style="display: none;" id="thumbnail-image" (change)="onThumbnailChange($event, cropperModal)">
+            </div>
+        </div>
+        <ng-container *ngIf="uploadedImages.length==0">
+            <div class="upload-img-box" (dragover)="fileDragStartNext($event)" (dragenter)="fileDragStartNext($event)" (dragleave)="fileDragEndNext($event)" (drop)="fileDroppedNext($event)">
+                <i class="far fa-images" (click)="browseImages($event)"></i>
+                <p (click)="browseImages($event)">Click here to upload photos or just drag them into this area.</p>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="uploadedImages.length>0">
+            <div class="upload-img-box" (dragover)="fileDragStartNext($event)" (dragenter)="fileDragStartNext($event)" (dragleave)="fileDragEndNext($event)" (drop)="fileDroppedNext($event)">
+                <div class="images-container">
+                    <div class="image-thumbnail" *ngFor="let img of uploadedImages; let i = index">
+                        <img [defaultImage]="spinnerSVG" [lazyLoad]="api.vehicleImageUrl(img.id)">
+                        <button type="button" class="xs red delete-image" (click)="deleteImage(i)"><i style="font-size: 15px;" class="fas fa-trash"></i></button>
+                        <div class="uploader-progress" *ngIf="img.uploading">
+                            <img src="/assets/images/spinner.svg">
+                        </div>
+                    </div>
+                </div>
+                <i class="far fa-images" (click)="browseImages($event)"></i>
+                <p (click)="browseImages($event)">Click here to upload photos or just drag them into this area.</p>
+            </div>
+        </ng-container>
+        <div class="price-box">
+            <p>YOUR PRICE</p>
+            <p>Your calculated price is only a first indication,You can always change it later at any time with our adviced flexible pricing tool.</p>
+            <div class="price-adder">
+                <input placeholder="0" min="0" type="number" [value]="price_per_night">
+                <div class="btns" (click)="plus()">
+                    <span>+</span>
+                </div>
+                <div class="btns mr-2" (click)="minus()">
+                    <span style=" margin-bottom: 5px;">-</span>
+                </div>
+                <p>Euro Per night</p>
+
+            </div>
+
+        </div>
+        <div class="rental">
+            <p>Minimum Rental Period :
+                <span style="color:#C9B084">{{min_booking_period}}
+                    <ng-container *ngIf="min_booking_period==1">Night</ng-container>
+                    <ng-container *ngIf="min_booking_period>1">Nights</ng-container>
+                </span>
+            </p>
+            <form>
+                <div class="form-group">
+                    <input type="range" class="form-control-range custom-range" id="formControlRange" [value]="min_booking_period" min="1" max="14" (change)="showVal($event)">
+                </div>
+                <div class="min-max">
+                    <p>1 night</p>
+                    <p>14 night</p>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="foot">
+        <button [routerLink]="['../camper-details']">Back</button>
+        <button (click)="save()">Next</button>
+    </div>
+</div>
+
+<ng-template #cropperModal>
+    <div class="modal-body">
+        <ng-scrollbar class="modal-scrollbar">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-wrapper">
+                        <h2 class="title" style="font-size: 20px;">Adjust Image</h2>
+                        <div>
+                            <button type="button" class="sm red" (click)="doneCroppingThumbnail()">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="264/193" [onlyScaleDown]="true" [roundCropper]="false" format="png" outputType="base64" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()" [alignImage]="'center'">
+                    </image-cropper>
+                </div>
+            </div>
+        </ng-scrollbar>
+    </div>
+</ng-template>

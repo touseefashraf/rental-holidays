@@ -1,0 +1,143 @@
+<div class="container m-container">
+    <div class="row">
+        <div class="detail-body">
+            <div class="detail-text">
+                <p>YOUR CAMPER DETAILS</p>
+            </div>
+            <form class="form-group" [formGroup]="camperDetailsForm" (ngSubmit)="save(camperDetailsForm, f)" #f="ngForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="">Title</label>
+                        <input formControlName="title" class="form-control" placeholder="Title" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Fuel Type</label>
+                        <select formControlName="fuel_type" class="form-control" placeholder="Fuel Type" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesal">Diesal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Transmission Type</label>
+                        <select formControlName="transmission_type" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value="auto">Automatic</option>
+                            <option value="manual">Manual</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Registration Country</label>
+                        <input formControlName="registration_country" class="form-control" placeholder="Make" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Make</label>
+                        <input formControlName="make" class="form-control" placeholder="Make" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                        <div *ngIf="ui.checkErrors(g.make, f)" class="errors">
+                            <p *ngIf="g.make.errors.required">Make is required</p>
+                            <p *ngIf="g.make.errors.maxlength">Make should be maximum {{ g.make.errors.maxlength.requiredLength }} charaters</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Modal</label>
+                        <input formControlName="model" class="form-control" placeholder="Modal" type="text" [ngClass]="{'form-submitted': f.submitted}">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <label for="">Permitter total weight</label>
+                            <input min="0" max="999999" formControlName="allowed_weight" class="weight-input" placeholder="Weight" type="number" [ngClass]="{'form-submitted': f.submitted}"><span style="margin-left:-25px;">kg</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Number of Sleeping spaces</label>
+                        <select formControlName="no_beds" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="ui.checkErrors(g.no_beds, f)" class="errors">
+                            <p *ngIf="g.no_beds.errors.required">Sleeping spaces is required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Number Gears</label>
+                        <select type="number" formControlName="no_gears" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option [value]="1">1</option>
+                            <option [value]="2">2</option>
+                            <option [value]="3">3</option>
+                            <option [value]="4">4</option>
+                            <option [value]="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Number of Seats</label>
+                        <select formControlName="no_seats" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Insured</label>
+                        <select type="number" formControlName="insured" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Camping Equipment</label>
+                        <select type="number" formControlName="camping_equipment" class="form-control" [ngClass]="{'form-submitted': f.submitted}">
+                            <option disabled value=null>Select</option>
+                            <option value=1>Available</option>
+                            <option value=0>Not Available</option>
+                        </select>
+                    </div>
+                    <ng-container>
+                        <div class="col-md-12">
+                            <div class="amenity-body">
+                                <div class="permissions-container">
+                                    <div class="permissions-list-box">
+                                        <label class="mb-0 heading-permissions">Click on Amenities to Add</label>
+                                        <div class="row">
+                                            <div class="col-md-6" *ngFor="let d of amenityList ; let i = index">
+                                                <div class="list-items" (click)="addRemoveAmenity(d)">
+                                                    {{d.title_en}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="arrow"><i class="fas fa-arrows-alt-h"></i></div>
+                                    <div class="permissions-list-box">
+                                        <label class="mb-0 heading-permissions">Selected Amenities</label>
+                                        <div class="row">
+                                            <div class="col-md-6" *ngFor="let d of selectedAmenity; let i = index">
+                                                <div class="selected-items" (click)="addRemoveAmenity(d)">
+                                                    {{d.title_en}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="foot">
+                    <button (click)="back()">Back</button>
+                    <button type="submit" [disabled]="Loading" [ngClass]="Loading?'in-progress':''">Next
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

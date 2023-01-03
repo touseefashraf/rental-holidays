@@ -1,0 +1,61 @@
+.large {
+    width: 60%;
+}
+.small {
+    width: 20%;
+    font-size: 14.4px;
+    font-weight: bold !important;
+}
+
+.heading-top {
+    border: 2px solid #eee;
+    padding: 5px 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: #eee;
+}
+.heading-top h4 {
+    margin: 0;
+}
+
+.chart-wrapper,
+.sales-report-wrapper {
+    border: 2px solid #eee;
+    padding: 5px 5px;
+}
+
+.report-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.inputs {
+    border: 2px solid #eee;
+    padding: 5px 5px;
+}
+
+.inputs label {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+.input-container {
+    align-items: flex-end;
+}
+
+.arrow i {
+    background-color: var(--ap-blue);
+    padding: 11.2px;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+    border: 1px solid #e0e0db;
+    border-radius: 3px;
+    padding: 4px 10px;
+    height: 38px;
+    font-size: 14px;
+    margin: 0px 0px;
+}

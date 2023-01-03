@@ -1,0 +1,10 @@
+<div class="sidebar_navigation sidebar-bottom-margin">
+    <ul>
+        <li><a href="#" [routerLink]="['/lender/profile']"><i class="fas fa-cogs profile"></i> <span>Profile Settings</span></a></li>
+        <li><a href="#" [routerLink]="['/lender/my-vehicles']"><i class="fas fa-shuttle-van"></i> <span>My Campers</span></a></li>
+        <li><a href="#" [routerLink]="['/lender/my-messages']"><i class="fas fa-envelope-open-text"></i> <span>My Messages</span></a></li>
+        <li><a href="#" [routerLink]="['/lender/booking-requests']"><i class="far fa-calendar-check"></i> <span>Booking Requests</span></a></li>
+        <li><a href="#" [routerLink]="['/lender/change-password']"><i class="fas fa-lock password"></i> <span>Change Password</span></a></li>
+        <li><a href="#" (click)="logOut()"><i class="fas fa-sign-out-alt logout"></i> <span>Logout</span></a></li>
+    </ul>
+</div>

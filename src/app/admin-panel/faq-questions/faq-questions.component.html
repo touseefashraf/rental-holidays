@@ -1,0 +1,149 @@
+<!-- <p>
+  faq-questions works!
+</p> -->
+
+<div class="main-container">
+
+    <div class="title-wrapper">
+        <h2 class="title">FAQ's</h2>
+        <!-- <button type="button" class="red pull-right" (click)="openModalFAQCat(faqCatTemplate, -1)">Add FAQ</button> -->
+        <button type="button" class="sm red pull-right" (click)="openModalFAQ(faqTemplate, -1)">Add FAQ</button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Question (English)</th>
+                    <th>Question (German)</th>
+                    <th>Question (Dutch)</th>
+                    <th class="col-actions">Action</th>
+                </tr>
+            </thead>
+            <ng-container *ngIf="dataStatus == 'fetching'">
+                <tbody [appSkeletonTabelLoader]="loaderOptions"></tbody>
+            </ng-container>
+            <ng-container *ngIf="dataStatus == 'done'">
+                <tbody *ngIf="faqData.length > 0; else noDataFound">
+                    <ng-container *ngFor="let faq of faqData; let i = index">
+                        <tr>
+                            <td>{{faq.question_en}}</td>
+                            <td>{{faq.question_de}}</td>
+                            <td>{{faq.question_nl}}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <button type="button" class="sm green" (click)="openModalFAQ(faqTemplate, i)">Edit</button>
+                                    <button type="button" class="sm red" (click)="confirmingModal(faqConfirming, faq.id,i)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-container>
+
+            <ng-template #noDataFound>
+                <tbody>
+                    <tr>
+                        <td colspan="4">
+                            <app-no-data-found></app-no-data-found>
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+    </div>
+</div>
+
+<ng-template #faqTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add FAQ</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="faqForm" (ngSubmit)="saveFAQ(faqForm, f)" #f="ngForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Question English</label>
+                            <input formControlName="question_en" class="form-control mt-0" placeholder="Enter English FAQ Question" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.question_en, f)" class="errors">
+                                <p *ngIf="g.question_en.errors.required">Question is required</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Question German</label>
+                            <input formControlName="question_de" class="form-control mt-0" placeholder="Enter German FAQ Question" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.question_de, f)" class="errors">
+                                <p *ngIf="g.question_de.errors.required">Question is required</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Question Dutch</label>
+                            <input formControlName="question_nl" class="form-control mt-0" placeholder="Enter Dutch FAQ Question" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.question_nl, f)" class="errors">
+                                <p *ngIf="g.question_nl.errors.required">Question is required</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Question French</label>
+                            <input formControlName="question_fr" class="form-control mt-0" placeholder="Enter French FAQ Question" [ngClass]="{'form-submitted': f.submitted}">
+                            <div *ngIf="ui.checkErrors(g.question_fr, f)" class="errors">
+                                <p *ngIf="g.question_fr.errors.required">Question is required</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Answer English</label>
+                            <textarea formControlName="answer_en" class="form-control mt-0" placeholder="Enter English FAQ Answer" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.answer_en, f)" class="errors">
+                                <p *ngIf="g.answer_en.errors.required">Answer is required</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Answer German</label>
+                            <textarea formControlName="answer_de" class="form-control mt-0" placeholder="Enter German FAQ Answer" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.answer_de, f)" class="errors">
+                                <p *ngIf="g.answer_de.errors.required">Answer is required</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Answer Dutch</label>
+                            <textarea formControlName="answer_nl" class="form-control mt-0" placeholder="Enter Dutch FAQ Answer" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.answer_nl, f)" class="errors">
+                                <p *ngIf="g.answer_nl.errors.required">Answer is required</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label class="mb-0">Answer French</label>
+                            <textarea formControlName="answer_fr" class="form-control mt-0" placeholder="Enter French FAQ Answer" [ngClass]="{'form-submitted': f.submitted}"></textarea>
+                            <div *ngIf="ui.checkErrors(g.answer_fr, f)" class="errors">
+                                <p *ngIf="g.answer_fr.errors.required">Answer is required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="red sm m-1" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''">save
+                <span></span><span></span><span></span>
+            </button>
+            <button type="button" class="black sm ml-1" (click)="cancelFAQButton(f)">Cancel</button>
+
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #faqConfirming>
+    <div class="modal-body text-center">
+        <p>Do you want to Delete?</p>
+        <button type="button" class="green sm" (click)="deleteFAQ()" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''">Yes
+            <span></span><span></span><span></span>
+        </button>
+        <button type="button" class="red sm" (click)="modalRef.hide()">No</button>
+    </div>
+</ng-template>

@@ -1,0 +1,439 @@
+<!-- <p>
+    product-details works!
+</p> -->
+<ng-container *ngIf="dataStatus == 'done'">
+    <div class="img-container">
+        <div class="imgs">
+            <ng-container *ngIf="camperDetailList.vehicle_images == null; else imgTemplate">
+                <img src="/assets/img/damon-on-road.jpg" alt="" />
+                <img src="/assets/img/ross-sneddon.jpg" alt="" />
+                <img src="/assets/img/lisa-van-dam.jpg" alt="" />
+            </ng-container>
+            <ng-template #imgTemplate>
+                <ng-container *ngFor="let img of camperDetailList.vehicle_images">
+                    <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.vehicleImages(img.id)" />
+                </ng-container>
+            </ng-template>
+        </div>
+        <div class="btn-see-photos">
+            <button (click)="openGallery(camperDetailList.vehicle_images)">
+                See All Photos
+            </button>
+        </div>
+    </div>
+
+    <div class="travel-detail">
+        <div class="travel-detail-center">
+            <div class="travel-heading">
+                <p>Rent from <strong>Є{{ camperDetailList.price_per_night }} per Night</strong></p>
+            </div>
+            <div class="travel-detail-container">
+                <div class="travel-date">
+                    <div class="travel-date-contains">
+                        <div class="travel-date-item">
+                            <div class="ml-2 mr-2">
+                                <i class="fas fa-calendar-alt icon"></i>
+                            </div>
+                            <div class="item date">
+                                <span>Pickup Date</span><br />
+                                <!-- <input type="text" placeholder="01/03/2021"> -->
+                                <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',adaptivePosition: true }" [minDate]="minDate" placeholder="Select a date" [(ngModel)]="request.start_date" />
+                            </div>
+                            <div class="ml-2 mr-2"></div>
+                            <div class="item">
+                                <span>Return Date</span><br />
+                                <!-- <input type="text" placeholder="20/03/2021"> -->
+                                <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD',adaptivePosition: true }" [minDate]="minDate" placeholder="Select a date" [(ngModel)]="request.end_date" />
+                            </div>
+                        </div>
+                        <div class="btn-travel-date">
+                            <button [disabled]="bookLoading" [ngClass]="bookLoading?'in-progress':''" (click)="bookTravel()">Select Travel Date
+                                <span></span><span></span><span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="travel-options">
+                    <div class="travel-options-items">
+                        <ng-container *ngIf="camperDetailList.camping_equipment == 1;else campingEquipment">
+                            <img class="options-icon" src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #campingEquipment>
+                            <img class="options-icon" src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                        <p>Camping Equipment</p>
+                    </div>
+                    <div class="travel-options-items">
+                        <ng-container *ngIf="
+                            camperDetailList.free_choice_km == 1;
+                            else campingEquipment
+                        ">
+                            <img class="options-icon" src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #campingEquipment>
+                            <img class="options-icon" src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                        <p>Free Choice of Kilometers</p>
+                    </div>
+                    <div class="travel-options-items">
+                        <ng-container *ngIf="camperDetailList.insured == 1; else insured">
+                            <img class="options-icon" src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #insured>
+                            <img class="options-icon" src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                        <p>Insurance</p>
+                    </div>
+                </div>
+                <div class="travel-fav">
+                    <div class="travel-fav-items">
+                        <img class="travel-fav-img" src="/assets/img/insurance-img.jpg" alt="" />
+                    </div>
+                    <div class="travel-fav-items">
+                        <button *ngIf="camperDetailList.favourite_vehicle==null" style="padding: 12px 51px;" [disabled]="Loading" [ngClass]="Loading?'in-progress':''" (click)="addFav(camperDetailList.id)"><i class="fas fa-heart"></i> add to favorites
+                            <span></span><span></span><span></span>
+                        </button>
+                        <button *ngIf="camperDetailList.favourite_vehicle" style="padding: 12px 29px;" [disabled]="Loading" [ngClass]="Loading?'in-progress':''" (click)="removeFav(camperDetailList.id)"><i style="color: red;" class="fas fa-heart"></i>Remove from favorites
+                            <span></span><span></span><span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="travel-discription">
+            <div class="travel-discription-heading">
+                <h3>Texel Camper</h3>
+            </div>
+
+            <div class="travel-discriptions">
+                <div class="travel-discription-items">
+                    <div class="items disc">
+                        <div class="ml-2">
+                            <i class="fa fa-map-marker icons"></i>
+                        </div>
+                        <div class="item">
+                            <span>{{ camperDetailList.location }}</span>
+                        </div>
+                    </div>
+                    <div class="items">
+                        <div class="ml-2">
+                            <irating [name]="'review' + camperDetailList.id" [value]="camperDetailList.avg_rating" [readonly]="true" [size]="20"></irating>
+                        </div>
+                        <div class="item">
+                            <span>{{ camperDetailList.avg_rating }} Reviews</span>
+                        </div>
+                    </div>
+                    <div class="items disc">
+                        <div class="ml-2">
+                            <i class="fas fa-shuttle-van icons"></i>
+                        </div>
+                        <div class="item">
+                            <!-- <ng-container *ngIf="camperDetailList.vehicle_type.title == undefined; else titleTemplate">
+                            <span>Box Van</span>
+                        </ng-container>
+                        <ng-template #titleTemplate>
+                            <span>{{camperDetailList.vehicle_type.title}}</span>
+                        </ng-template> -->
+                            <span class="item-title">{{ camperDetailList.title }}</span>
+                        </div>
+                    </div>
+                    <div class="items">
+                        <div class="ml-2">
+                            <i class="fas fa-ruler icons"></i>
+                        </div>
+                        <div class="item"><span>{{ distance | number: '1.0-2' }} km</span></div>
+                    </div>
+                </div>
+                <div class="travel-discription-user">
+                    <div class="user">
+                        <p>Belongs to</p>
+                    </div>
+                    <div class="user-detail">
+                        <div class="details">
+                            <div>
+                                <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.profileImage(camperDetailList.user.id)" />
+
+                            </div>
+                            <div class="line"></div>
+                            <div class="details-item">
+                                <div class="user-name">{{ camperDetailList.user.first_name }} {{ camperDetailList.user.last_name }}</div>
+                                <ng-container *ngIf="camperDetailList.user.landlord.verified == 0;else verifiedUser">
+                                    <span> </span>
+                                </ng-container>
+                                <!-- <span class="color"><i class="fas fa-shield-alt"></i> Verified by <span><strong>Rental holidays</strong></span></span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-description-container">
+            <div class="m-d-heading">
+                <h3>Model Description</h3>
+            </div>
+            <div class="m-d-content-container">
+                <div class="m-d-content">
+                    <div class="content">
+                        <h4>Make</h4>
+                        <div class="line-row"></div>
+                        <p>{{ camperDetailList.make }}</p>
+                    </div>
+                    <div class="content">
+                        <h4>Model</h4>
+                        <div class="line-row"></div>
+                        <p>{{ camperDetailList.model }}</p>
+                    </div>
+                    <div class="content">
+                        <h4>Body Style</h4>
+                        <div class="line-row"></div>
+                        <p>{{ camperDetailList.vehicle_type.title }}</p>
+                    </div>
+                    <div class="content">
+                        <h4>Transmission</h4>
+                        <div class="line-row"></div>
+                        <p>{{ camperDetailList.transmission_type }}</p>
+                    </div>
+                    <div class="content">
+                        <h4>Fuel</h4>
+                        <div class="line-row"></div>
+                        <p>{{ camperDetailList.fuel_type }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="equipment-container">
+            <div class="e-c-head">
+                <div class="head-content-active">
+                    <h5>Basic Equipment</h5>
+                </div>
+                <div class="head-content inactive">
+                    <h5>Body Equipment</h5>
+                </div>
+                <div class="head-content inactive">
+                    <h5>Special Equipment</h5>
+                </div>
+            </div>
+            <div class="e-c-content-container">
+                <div class="e-c-content">
+                    <ng-container *ngFor="let al of amenityList">
+                        <div class="content">
+                            <h4>{{ al.title_en }}</h4>
+                            <div class="line-row color"></div>
+                            <i *ngIf="getCheck(al.id) == false" class="fas fa-check n-a-color"></i>
+                            <i *ngIf="getCheck(al.id) == true" class="fas fa-check color"></i>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="additional-equipment-container">
+            <div class="a-e-head">
+                <h4>Additional Equipment</h4>
+            </div>
+            <div class="a-e-content">
+                <p>
+                    <app-read-more [text]="camperDetailList.additional_equipment" [maxLength]="300"></app-read-more>
+                </p>
+            </div>
+        </div>
+
+        <div class="camper-detail-container">
+            <div class="c-d-content">
+                <h4>{{ camperDetailList.user.first_name }} on {{ camperDetailList.title }}</h4>
+                <p>
+                    <app-read-more [text]="camperDetailList.description" [maxLength]="300"></app-read-more>
+                </p>
+                <!-- <div class="c-d-btn">Show More <i class='fas fa-chevron-down'></i></div> -->
+                <img class="user" [defaultImage]="spinnerSVG" [lazyLoad]="ds.profileImage(camperDetailList.user.id)" />
+            </div>
+            <img class="c-d-img" src="/assets/img/hills-new.png" alt="" />
+        </div>
+
+        <div class="camper-rules-container">
+            <fieldset>
+                <legend>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="43.592" height="52.479" viewBox="0 0 43.592 52.479">
+                            <path id="Icon_weather-storm-warning" data-name="Icon weather-storm-warning" d="M11.712,54.089V8.94h2.975V54.089Zm5.107-27.774V8.94H39.328V26.315Zm6.213-5.265h10.03V14.468H23.032Z" transform="matrix(0.914, -0.407, 0.407, 0.914, -14.336, 7.829)" fill="#bfa16c" />
+                        </svg>
+                    </span>
+                    camper rules
+                </legend>
+                <div class="c-r-content-container">
+                    <div class="c-r-content">
+                        <p>Animals Allowed</p>
+                        <p>Smoking Allowed</p>
+                    </div>
+                    <div class="c-r-content">
+                        <h4>Yes</h4>
+                        <ng-container *ngIf="camperDetailList.rental_conditions.animals_allowed == 1;else animalsAllowed">
+                            <img src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #animalsAllowed>
+                            <img src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                        <ng-container *ngIf="camperDetailList.rental_conditions.smoking_allowed == 1;else smokingAllowed">
+                            <img src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #smokingAllowed>
+                            <img src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                    </div>
+                    <div class="c-r-content">
+                        <h4>No</h4>
+                        <ng-container *ngIf="camperDetailList.rental_conditions.animals_allowed == 0;else animalsAllowed1">
+                            <img src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #animalsAllowed1>
+                            <img src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                        <ng-container *ngIf="camperDetailList.rental_conditions.smoking_allowed == 0;else smokingAllowed1">
+                            <img src="/assets/img/tick.png" alt="" />
+                        </ng-container>
+                        <ng-template #smokingAllowed1>
+                            <img src="/assets/img/tick-null.png" alt="" />
+                        </ng-template>
+                    </div>
+                    <div class="c-r-content" style="display: none">
+                        <h4>In Arrangement</h4>
+                        <img src="/assets/img/tick-null.png" alt="" />
+                        <img src="/assets/img/tick-null.png" alt="" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="rental-conditions-container">
+            <fieldset>
+                <legend>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35.259" height="42.609" viewBox="0 0 35.259 42.609">
+                            <path id="Icon_weather-gale-warning" data-name="Icon weather-gale-warning" d="M12.8,45.681V8.94h2.207V45.681Zm3.706-4.627V25.179l18.531,7.905Zm0-16.239V8.94l18.531,7.905Z" transform="matrix(0.914, -0.407, 0.407, 0.914, -15.333, 6.085)" fill="#bfa16c" />
+                        </svg>
+                    </span>
+                    Rental Conditions for {{ camperDetailList.user.first_name }}'s Bus
+                </legend>
+                <div class="r-c-content-container">
+                    <div class="r-c-content">
+                        <div class="content">
+                            <span><i class="fa fa-circle color outer"></i></span>
+                            <h4>Minimum Age of Renters</h4>
+                            <div class="r-c-line-row"></div>
+                            <p>{{ camperDetailList.rental_conditions.tenant_min_age }} Years</p>
+                        </div>
+                        <div class="content">
+                            <span><i class="fa fa-circle color"></i></span>
+                            <h4>Length of time in possession of driving licence</h4>
+                            <div class="r-c-line-row"></div>
+                            <p>{{ camperDetailList.rental_conditions.driving_license_possesion }} Years</p>
+                        </div>
+                        <div class="content">
+                            <span><i class="fa fa-circle color"></i></span>
+                            <h4>Amount of access with fully comprehensive insurance</h4>
+                            <div class="r-c-line-row"></div>
+                            <p>€ {{ camperDetailList.rental_conditions.deposite_amount }}</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="cancellation-policy-container">
+            <fieldset>
+                <legend>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="39.004" height="39.004" viewBox="0 0 39.004 39.004">
+                            <path id="Icon_material-cancel" data-name="Icon material-cancel" d="M22.5,3A19.5,19.5,0,1,0,42,22.5,19.484,19.484,0,0,0,22.5,3Zm9.751,26.5-2.75,2.75-7-7-7,7-2.75-2.75,7-7-7-7,2.75-2.75,7,7,7-7,2.75,2.75-7,7Z" transform="translate(-3 -3)" fill="#bfa16c" />
+                        </svg>
+                    </span>
+                    Cancellation Policy
+                </legend>
+                <div class="c-p-content-container">
+                    <div class="c-p-content">
+                        <div class="content">
+                            <p>After the offer is accepted, the following conditions of cancellation apply to the renter:</p>
+                        </div>
+                        <div class="content">
+                            <span><i class="fa fa-circle color"></i></span>
+                            <p>{{ camperDetailList.cancellation_policy }}</p>
+                        </div>
+                        <!-- <div class="content">
+                    <span><i class="fa fa-circle color"></i></span>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae, velit!</p>
+                </div>
+                <div class="content">
+                    <span><i class="fa fa-circle color"></i></span>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta, minus.</p>
+                </div> -->
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="reviews-container">
+            <div class="r-head">
+                <h4>Reviews ({{ camperDetailList.vehicle_reviews.length }})</h4>
+            </div>
+            <div class="r-content-container">
+                <ng-container *ngFor="let review of camperDetailList.vehicle_reviews">
+                    <div class="r-content">
+                        <div class="r-c-item">
+                            <div class="r-c-img">
+                                <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.profileImage(review.id)" />
+                                <div class="r-c-items">
+                                    <h5>{{ review.user.first_name }} {{ review.user.last_name }}</h5>
+                                    <p>{{ review.created_at | date: "dd/MM/yy" }}</p>
+                                </div>
+                            </div>
+                            <div class="r-c-stars">
+                                <div class="ml-2">
+                                    <irating [name]="'review' + review.id" [value]="review.rating" [readonly]="true" [size]="20"></irating>
+                                </div>
+                            </div>
+                        </div>
+                        <p>{{ review.feedback }}</p>
+                    </div>
+                </ng-container>
+                <div class="r-btn">Read All Reviews</div>
+            </div>
+            <img class="r-img" src="/assets/img/icon-awesome-star.png" alt="" />
+        </div>
+
+        <div class="user-detail-container">
+            <div class="u-d-content">
+                <div>
+                    <img [defaultImage]="spinnerSVG" [lazyLoad]="ds.profileImage(camperDetailList.user.id)" />
+                    <!-- <img src="/assets/img/Untitle-user.png" alt=""> -->
+                </div>
+                <div class="u-d-line"></div>
+                <div class="details-item">
+                    <div class="u-d-name">{{ camperDetailList.user.first_name }} {{ camperDetailList.user.last_name }}</div>
+                    <div class="u-d-member">
+                        {{ camperDetailList.registration_country.charAt(0).toUpperCase() + camperDetailList.registration_country.slice(1) }}, Member Since {{ camperDetailList.user.created_at | date: "mediumDate" }}
+                    </div>
+                    <ng-container *ngIf="camperDetailList.user.landlord.verified == 0;else verifiedUser">
+                        <span> </span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="hire-other-container">
+            <img class="h-o-img" src="/assets/img/group-van.png" alt="" />
+            <div class="h-o-btn">
+                <a [routerLink]="['/camper-search']">Hire other moterhomes in {{ camperDetailList.registration_country.charAt(0).toUpperCase() + camperDetailList.registration_country.slice(1) }}</a>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #verifiedUser>
+    <svg xmlns="http://www.w3.org/2000/svg" width="15.133" height="19.385" viewBox="0 0 19.133 23.385">
+        <path id="Icon_material-verified-user" data-name="Icon material-verified-user" d="M14.067,1.5,4.5,5.752V12.13c0,5.9,4.082,11.416,9.567,12.756,5.485-1.339,9.567-6.856,9.567-12.756V5.752ZM11.941,18.507,7.689,14.256l1.5-1.5L11.941,15.5l7-7L20.444,10Z" transform="translate(-4.5 -1.5)" fill="#bfa16c" />
+    </svg>
+    <span class="color"> Verified by <span><strong>Rental holidays</strong></span></span>
+</ng-template>

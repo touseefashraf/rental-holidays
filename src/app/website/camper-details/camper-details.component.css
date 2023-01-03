@@ -1,0 +1,1005 @@
+.line {
+    border-left: 1px solid #bfa16c;
+    height: 50px;
+    margin: 0 20px;
+}
+
+.line-row {
+    border-bottom: 1px solid #e6ddcd;
+    width: 150px;
+    margin: 0 30px;
+}
+
+.r-c-line-row {
+    border-bottom: 1px solid #e6ddcd;
+    width: 300px;
+    margin: 0 30px;
+}
+
+.color {
+    color: #bfa16c;
+}
+
+.color-white {
+    color: #ffff;
+    font-size: 15px;
+    margin: 0 15px 0 0;
+}
+
+.n-a-color {
+    color: #ece3d2;
+}
+
+/* IMAGE START */
+.img-container {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.imgs {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+img {
+    height: 400px;
+    width: auto;
+}
+
+.btn-see-photos {
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+}
+.btn-see-photos button {
+    background-color: #e5dccd;
+    color: #605f5e;
+    padding: 10px 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* TRAVEL DETAIL START */
+.travel-detail {
+    width: 100%;
+    margin-top: -40px;
+    /* position: absolute; */
+}
+
+.travel-detail-center {
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 20px;
+    position: relative;
+}
+
+.travel-heading {
+    background-color: #5c6f69;
+    color: #fff;
+    padding: 15px 50px;
+    font-size: 18px;
+    border-radius: 5px 5px 0 0;
+}
+
+.travel-heading p {
+    margin: 0;
+}
+
+.travel-detail-container {
+    background-color: #e5dccb;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 0 0 5px 5px;
+}
+
+.travel-date-contains {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.travel-date-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #bfa16c;
+    margin: 25px 0 0 0;
+    padding: 15px 0px 15px 15px;
+    border-radius: 4px;
+}
+
+.item span {
+    font-weight: bold;
+}
+
+.item input {
+    border: none;
+    width: 75%;
+}
+
+.item input::placeholder {
+    color: #000;
+}
+
+.icon {
+    color: #bfa16c;
+    font-size: 28px;
+    margin: 0 15px 0 0;
+}
+
+.date::after {
+    content: " ";
+    background: #ccc;
+    margin: -15px 35px;
+    width: 1px;
+    height: 35px;
+    position: absolute;
+    right: 0px;
+}
+
+.item.date {
+    position: relative;
+}
+
+.btn-travel-date {
+    margin: 25px 0;
+}
+.btn-travel-date button {
+    background-color: #525252;
+    padding: 12px 30px;
+}
+
+.travel-options-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.options-icon {
+    width: 22px;
+    height: auto;
+}
+
+.travel-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 25px 0 0 0;
+}
+
+.travel-options-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 20px 0;
+    color: #525252;
+}
+
+.travel-options-items p {
+    margin: 0 0 0 10px;
+}
+
+.travel-fav-img {
+    width: 250px;
+    height: auto;
+    margin: 25px 0 15px -2px;
+}
+
+.travel-fav-items button {
+    background-color: #e5dccb;
+    color: #525252;
+    border: 0.25px solid;
+    padding: 12px 39px;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 15px 0;
+}
+
+i.fas.fa-heart {
+    margin: 0 10px 0 0;
+}
+
+/* TRAVEL DISCRIPTION START */
+.travel-discription {
+    width: 80%;
+    margin: 0 auto;
+    padding: 3% 0 3% 3%;
+}
+
+.travel-discription-heading h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #525252;
+}
+
+.travel-discriptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.travel-discription-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.items {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0px 35px 0;
+    width: 49%;
+}
+
+.icons {
+    color: #bfa16c;
+    font-size: 20px;
+    margin: 0 15px 0 0;
+}
+.start-icons {
+    color: #bfa16c;
+    font-size: 20px;
+    margin: 0 15px 0 0;
+}
+
+.disc {
+    border-right: 1px solid #ccc;
+}
+
+.item.disc {
+    position: relative;
+}
+
+.user p {
+    font-weight: bold;
+}
+
+.user-detail {
+    /* width: 300px;
+    height: 120px; */
+    background-color: #f6f5f0;
+    border-radius: 5px;
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.details img {
+    width: 80px;
+    height: auto;
+}
+.details-item .user-name {
+    margin: 0 8px 0 0;
+}
+
+/* MODEL DESCRIPTION START*/
+.model-description-container {
+    width: 80%;
+    background-color: #f6f5f0;
+    margin: 0 auto;
+    padding: 3% 8% 4% 8%;
+    border-radius: 5px;
+}
+
+.m-d-heading h3 {
+    font-weight: bold;
+    color: #525252;
+}
+
+.m-d-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.m-d-content {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0 0 0;
+}
+
+.m-d-content > .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.m-d-content > .content h4 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #525252;
+    margin: 0;
+}
+
+.m-d-content > .content p {
+    margin: 0;
+    font-size: 18px;
+    color: #565656;
+}
+
+/* EQUIPMENT START */
+.equipment-container {
+    width: 64%;
+    margin: 50px auto;
+}
+
+.e-c-head {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #bfa16b;
+    margin: 4% 0 2% 0;
+}
+
+.head-content-active {
+    background-color: #bfa16b;
+    color: #fff;
+}
+
+.inactive {
+    display: none;
+}
+
+.head-content {
+    background-color: #e5dccb;
+    color: #525252;
+}
+
+.head-content-active,
+.head-content {
+    padding: 35px 70px 20px 25px;
+    margin: 0 1px 0px 0px;
+    border-radius: 15px 80px 0 0;
+}
+
+.e-c-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 0 4% 0;
+}
+
+.e-c-content {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0 0 0;
+}
+
+.e-c-content > .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.e-c-content > .content h4 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #525252;
+    margin: 0;
+}
+
+.content > i.fas.fa-check {
+    font-size: 18px;
+}
+
+/* ADDITIONAL EQUIPMENT START */
+.additional-equipment-container {
+    width: 65%;
+    margin: 0 auto;
+    border: 1px solid #c3a774;
+    border-radius: 5px;
+    padding: 30px 30px 20px 45px;
+}
+
+.a-e-head h4 {
+    color: #535353;
+    font-weight: 600;
+}
+
+.a-e-content p {
+    margin: 20px 0 10px 0;
+    color: #0f0f0f;
+}
+
+/* CAMPER DETAIL START */
+.camper-detail-container {
+    width: 80%;
+    margin: 40px auto 30px;
+    background-color: #f6f5f0;
+}
+
+.c-d-content {
+    padding: 3% 0 0 5%;
+    position: relative;
+}
+
+.c-d-content h4 {
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 0 30px 0;
+    color: #525252;
+}
+
+.c-d-content p {
+    margin: 0;
+    width: 70%;
+    color: #525252;
+}
+
+.c-d-btn {
+    padding: 12px 20px;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #c2a674;
+    margin: 20px 0;
+    color: #c2a674;
+}
+
+i.fas.fa-chevron-down {
+    margin: 0 0 0 12px;
+}
+
+img.user {
+    width: 140px;
+    height: auto;
+    position: absolute;
+    right: 65px;
+    bottom: -50px;
+    bottom: 0;
+    /* bottom: 30px; */
+    border: 1px solid #c2a674;
+    border-radius: 50%;
+}
+
+img.c-d-img {
+    width: 100%;
+    height: auto;
+    /* margin: -330px 0 0 0; */
+    margin: -240px 0 0 0;
+    /* margin: -135px 0 0 0; */
+    border-radius: 10px;
+}
+
+/* CAMPER RULES START */
+.camper-rules-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: 1px dashed #bfa16c;
+    border-width: medium;
+    border-radius: 5px;
+}
+
+legend {
+    width: auto;
+    margin: 0 0 0 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 15px;
+    color: #525252;
+}
+
+.c-r-content-container {
+    display: flex;
+    flex-direction: row;
+    padding: 30px 0 10px 0;
+}
+
+.c-r-content:first-child {
+    width: 62% !important;
+}
+
+.c-r-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 50px 0 0;
+}
+
+.c-r-content p {
+    margin: 0 0 30px 65px;
+}
+.c-r-content h4 {
+    margin: -40px 0 15px 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.c-r-content > img {
+    width: 22px;
+    height: auto;
+    margin: 5px 0 45px 0;
+}
+
+/* RENTAL CONDITIONS START */
+.rental-conditions-container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.r-c-content {
+    margin: 20px 0;
+}
+
+.r-c-content > .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 60px;
+}
+
+i.fa.fa-circle.color {
+    font-size: 10px;
+}
+
+/* i.fa.fa-circle.inner {
+    display: none;
+} */
+
+.r-c-content > .content > h4 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* CANCELLATION POLICY START */
+.cancellation-policy-container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.c-p-content {
+    padding: 10px 60px 10px 60px;
+}
+
+.c-p-content .content {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 25px 0;
+}
+
+.c-p-content .content p {
+    margin: 0;
+    font-weight: bold;
+}
+
+i.fa.fa-circle.color {
+    margin: 0 20px 0 0;
+}
+
+/* REVIEWS START */
+.reviews-container {
+    background-color: #5c6f69;
+    padding: 3% 0 8% 0;
+    margin: 50px 0 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.r-content {
+    border: 1px solid #fff;
+    width: 70%;
+    margin: 35px auto;
+    padding: 30px;
+}
+
+.r-head h4 {
+    margin: 0 0 0 15%;
+    color: #fff;
+    font-weight: bold;
+}
+
+.r-c-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.r-c-img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.r-c-img img {
+    width: 100px;
+    height: auto;
+    margin: 0 30px 0 0;
+}
+
+.r-content {
+    color: #fff;
+}
+
+.r-content > p {
+    margin: 25px 0 0 0;
+}
+
+.r-btn {
+    padding: 12px 30px;
+    background-color: #e5dccd;
+    border-radius: 6px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+img.r-img {
+    position: absolute;
+    right: -50px;
+    bottom: -75px;
+}
+
+/* USER DETAIL START */
+.user-detail-container {
+    background-color: #f6f5f0;
+}
+
+.u-d-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.u-d-content img {
+    width: 95px;
+    height: auto;
+}
+
+.u-d-line {
+    border-left: 1px solid #bfa16c;
+    height: 75px;
+    margin: 0 30px;
+}
+
+.u-d-name {
+    font-size: 25px;
+    font-weight: bold;
+    color: #525252;
+}
+
+.u-d-member {
+    margin: 5px 0;
+    font-weight: 400;
+    color: #525252;
+}
+
+/* HIRE OTHER START */
+.hire-other-container {
+    position: relative;
+}
+
+.h-o-img {
+    width: 100%;
+    height: auto;
+}
+
+.h-o-btn a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e5dccd;
+    color: #525252;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.red {
+    color: red;
+}
+
+@media only screen and (max-width: 1024px) {
+    .btn-see-photos {
+        right: 2.5%;
+    }
+
+    .btn-see-photos button {
+        padding: 10px 40px;
+    }
+
+    .travel-detail-center {
+        width: 95%;
+    }
+
+    .travel-discription {
+        width: 95%;
+    }
+
+    .travel-discription-items {
+        width: 58%;
+    }
+
+    .model-description-container {
+        width: 95%;
+    }
+
+    .equipment-container {
+        width: 80%;
+    }
+
+    .e-c-content > .content {
+        padding: 16px 30px 16px 0;
+    }
+
+    .additional-equipment-container {
+        width: 80%;
+    }
+
+    .camper-detail-container {
+        width: 95%;
+    }
+
+    img.c-d-img {
+        margin: -240px 0 0 0;
+    }
+    img.user {
+        position: absolute;
+        right: 65px;
+        bottom: 35px;
+    }
+
+    .camper-detail-container {
+        border-radius: 10px;
+    }
+
+    .camper-rules-container {
+        width: 95%;
+    }
+
+    .rental-conditions-container {
+        width: 95%;
+    }
+
+    .cancellation-policy-container {
+        width: 95%;
+    }
+
+    .r-head h4 {
+        margin: 0 0 0 10%;
+    }
+
+    .r-content {
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .date::after {
+        margin: -15px 0px;
+    }
+
+    .travel-detail-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .travel-discription-items {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .items {
+        width: 100%;
+    }
+
+    .item.disc {
+        position: unset;
+    }
+
+    .model-description-container {
+        padding: 4%;
+    }
+
+    .line-row {
+        margin: 0 15px;
+    }
+
+    .equipment-container {
+        width: 87%;
+    }
+
+    .head-content-active,
+    .head-content {
+        padding: 25px 25px 10px 15px;
+    }
+
+    .e-c-content > .content h4 {
+        font-size: 18px;
+    }
+
+    .additional-equipment-container {
+        width: 87%;
+    }
+
+    img.user {
+        right: 40px;
+        bottom: 65px;
+    }
+
+    img.c-d-img {
+        margin: -200px 0 0 0;
+        /* margin: -220px 0 0 0; */
+    }
+    .r-c-line-row {
+        width: 90px;
+        margin: 0px 0px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .travel-heading {
+        padding: 15px 15px;
+    }
+
+    .travel-date-contains {
+        padding: 0 15px;
+    }
+
+    .travel-detail-center {
+        width: 100%;
+    }
+
+    .travel-discriptions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .travel-discription-items {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .m-d-content-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-detail {
+        display: flex;
+        width: 97%;
+    }
+
+    .travel-discription {
+        width: 100%;
+    }
+
+    .model-description-container {
+        width: 100%;
+    }
+
+    .equipment-container {
+        width: 92%;
+    }
+
+    .e-c-content-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .e-c-head h5 {
+        font-size: 15px;
+    }
+
+    .additional-equipment-container {
+        width: 92%;
+    }
+
+    img.user {
+        width: 85px;
+    }
+
+    .r-c-content > .content {
+        margin: 15px 25px 0px 30px;
+    }
+
+    .r-c-content > .content > h4 {
+        font-size: 14px;
+    }
+
+    .r-c-content > .content > p {
+        margin: 0;
+        text-align: right;
+    }
+
+    .r-c-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .r-c-stars {
+        margin: 24px 0 0 0;
+    }
+
+    img.c-d-img {
+        margin: -100px 0 0 0;
+    }
+
+    img.user {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    legend {
+        margin: 0 0 0 20px;
+        padding: 0 15px;
+        font-size: 15px;
+    }
+
+    .c-r-content-container {
+        padding: 30px 0 10px 0;
+    }
+
+    .c-r-content {
+        margin: 0px 15px 0 0;
+    }
+
+    .c-r-content p {
+        margin: 0 0 30px 30px;
+    }
+
+    .c-p-content {
+        padding: 10px 30px 10px 30px;
+    }
+
+    .reviews-container {
+        padding: 3% 0 16% 0;
+    }
+
+    .r-head h4 {
+        margin: 0px 0 0 3%;
+    }
+
+    .r-content {
+        width: 95%;
+    }
+
+    .color-white {
+        margin: 0px 5px 0 0;
+    }
+
+    .h-o-btn {
+        width: 67%;
+        text-align: center;
+    }
+    .h-o-btn a {
+        width: 70%;
+    }
+}

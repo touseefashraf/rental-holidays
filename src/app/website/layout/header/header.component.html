@@ -1,0 +1,38 @@
+<section class="headerBanner">
+    <div class="logo-container">
+        <div class="logo-wrapper">
+            <a [routerLink]="['/']"><img *ngIf="api.headerType=='black'" src="/assets/img/logo-black.png"></a>
+            <a [routerLink]="['/']"><img *ngIf="api.headerType=='white'" src="/assets/img/logo-white.png"></a>
+        </div>
+    </div>
+    <div class="container {{api.headerType}}">
+        <nav class="navbar navbar-expand-lg navbar-dark bg_color_primary d-flex justify-content-between row ">
+
+            <div class="navbar-nav  col-4 align-items-start ">
+                <div class="header-item show-btn">
+                    <a *ngIf="!isAdmin" class="" [routerLink]="['../camper-search']">Hire a motor</a>
+                    <a *ngIf="!isAuthenticated" [routerLink]="['../lender-registration/camper-type']" class="">Become a lender</a>
+                    <ng-container *ngIf="isAuthenticated">
+                        <a *ngIf="isAdmin" [routerLink]="['../admin/dashboard']" class="">My Portal</a>
+                        <a *ngIf="isLandLord" [routerLink]="['../lender/profile']" class="">My Portal</a>
+                        <a *ngIf="isTenant" [routerLink]="['../tenant/profile']" class="">My Portal</a>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse  col-8 " id="navbarNavDropdown" [collapse]="isCollapsed">
+                <div class="navbar-nav ml-auto header-item">
+                    <div class="nav-item nav-link">
+                        <select [(ngModel)]="ts.currentLang" class="lang-dropdown" (change)="api.changeLanguage(ts.currentLang)">
+                            <option *ngFor="let lang of languages | keyvalue" [value]="lang.key">{{lang.key|uppercase}}&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                        </select>
+                    </div>
+                    <a *ngIf="!isAuthenticated" class="nav-item nav-link" [routerLink]="[ '/lender-registration/camper-type' ]">Register</a>
+                    <a *ngIf="!isAuthenticated" class="nav-item nav-link" [routerLink]="[ '/login' ]">Login</a>
+                    <a *ngIf="isAuthenticated" class="nav-item nav-link" href="javascript:void(0)" (click)="logOut()">Logout</a>
+                    <a class="nav-item nav-link hide-btn">Hire a motor</a>
+                    <a [routerLink]="['../lender-registration/camper-type']" class="nav-item nav-link head-btn hide-btn">Become a lender</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>

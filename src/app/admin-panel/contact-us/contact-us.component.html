@@ -1,0 +1,50 @@
+<div class="row m-3 no-gutters">
+    <div class="col-md-12 mb-1">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>User Detail</th>
+                        <th class="user-msg">User Message</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <ng-container *ngIf="dataStatus == 'fetching'">
+                    <tbody [appSkeletonTabelLoader]="loaderOptions"></tbody>
+                </ng-container>
+                <ng-container *ngIf="dataStatus == 'done'">
+                    <tbody *ngIf="dataList.length > 0; else noDataFound">
+                        <tr *ngFor="let d of dataList; let i = index">
+                            <td class="info-box">
+                                <strong>Subject:</strong> {{d.subject}} <br>
+                                <strong>Name:</strong> {{d.name}} <br>
+                                <strong> Email:</strong> {{d.email}} <br>
+                                <strong>Contact No:</strong> {{d.contact_no}} <br>
+                            </td>
+                            <td>
+                                <app-read-more [text]="d.message" [maxLength]="150"></app-read-more>
+                            </td>
+                            <td class=" justify-content-center">
+                                <button *ngIf="d.status == 'read'" type="button" (click)="updateStatus(d.id, 'unread',i)" class="sm red" [disabled]="waiting.loader[i]" [ngClass]="{'in-progress': waiting.loader[i]}">Unread
+                                    <span></span><span></span><span></span>
+                                </button>
+                                <button *ngIf="d.status == 'unread'" type="button" (click)="updateStatus(d.id,'read',i)" class="sm green" [disabled]="waiting.loader[i]" [ngClass]="{'in-progress': waiting.loader[i]}">Read
+                                    <span></span><span></span><span></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <ng-template #noDataFound>
+                        <tbody>
+                            <tr>
+                                <td colspan="4">
+                                    <app-no-data-found></app-no-data-found>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+</div>

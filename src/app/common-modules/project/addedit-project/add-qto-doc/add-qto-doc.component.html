@@ -1,0 +1,54 @@
+<div class="main-container">
+    <app-steps-template [step]="'qtoDoc'"></app-steps-template>
+    <div class="text-right">
+        <button class="red sm" (click)="dataService.navigateWindow({id:dataService.selectedId,step:'other'})">Back</button>
+        <button [disabled]="isLoading" [ngClass]="isLoading? 'in-progress' : ''" *ngIf="data.length !== 0" class="green sm" (click)="save()">Save
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <button type="button" class="sm blue" [routerLink]="['/'+api.user.user_type+'/project/list']" routerLinkActive="router-link-active"  style="width: 174px">Goto List</button>
+
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <!-- <th class="col-actions">Action</th> -->
+                </tr>
+            </thead>
+            <tbody *ngIf="data.length > 0">
+                <ng-container *ngFor="let d of data; let i = index">
+                    <tr *ngIf="d.document_type == 'qto'">
+                        <td>
+                            <a (click)="downloadDocument(d.id,d)" style="cursor: pointer;">{{ d.name }}</a></td>
+                        <td>
+                            <input type="number" min="0" name="" id="" [(ngModel)]="dataToSend.document_data[i].qto_price">
+                            <p style="color: red; font-weight: bold;" *ngIf="dataToSend.document_data[i].qto_price < 0">Price cant be less then 0</p>
+                        </td>
+                        <!-- <td>
+                            <button class="green sm">download</button>
+                        </td> -->
+                    </tr>
+                </ng-container>
+            </tbody>
+            <tbody *ngIf="dataToSend.document_data.length == 0">
+                <tr>
+                    <td colspan="3">
+                        <app-no-data-found></app-no-data-found>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ng-template #confirmingTemplate>
+    <div class="modal-body text-center">
+        <p>Do you want to Delete all Files?</p>
+
+        <button type="button" class="green sm" (click)="mRef.hide()">No</button>
+        <button type="button" class="red sm" (click)="deleteAllFiles()">Yes</button>
+    </div>
+</ng-template>

@@ -1,0 +1,65 @@
+<ng-container *ngIf="dataStatus == 'fetching'">
+    <div class=" text-center">
+        <img src="/assets/images/spinner.svg" style="width: 100px; margin-top:8%;margin-bottom:8%;">
+    </div>
+</ng-container>
+<div *ngIf="dataStatus == 'done'" class="row m-3 no-gutters">
+    <div class="col-md-12 mb-1">
+        <div class="top">
+            <h3> My Campers:</h3>
+            <button class="add-btn" [routerLink]="['/lender/add-vehicles/camper-type']">Add New Camper</button>
+        </div>
+
+        <div class="motors-wrapper">
+            <ng-container *ngFor="let vehicle of myVehicles; let i = index">
+                <div class="motor-cover">
+                    <div class="motor-img">
+                        <!-- <img src="/assets/img/camper-pic.png"> -->
+                        <img [defaultImage]="spinnerSVG" [lazyLoad]="dataService.vehicleMainImageUrl(vehicle.id)">
+                    </div>
+                    <div class="col-md-12 info-cover">
+                        <div class="motor-title">
+                            <p style="margin: 0;">{{(vehicle.vehicle_type)?vehicle.vehicle_type.title:'new'}} <span>{{vehicle.price_per_night}} &euro;</span>
+                            </p>
+                        </div>
+                        <div class="per-night">
+                            <div class="beds">
+                                <i class="fas fa-user"></i>
+                                <p>{{vehicle.no_seats}}</p>
+                                <i class="fas fa-bed"></i>
+                                <p>{{vehicle.no_beds}}</p>
+                                <!-- <i class="fa fa-gears"></i>
+                                <p>{{vehicle.no_gears}}</p> -->
+                            </div>
+                            <p>PER NIGHT</p>
+                        </div>
+                        <div class="motor-price">
+                            <div><i style="color: #c9b084;font-size: 16px;" class="fas fa-map-marker-alt"></i> {{vehicle.location}}, {{vehicle.registration_country}}</div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 actions">
+                        <button [routerLink]="['../../add-vehicles/'+vehicle.id+'/camper-details']" class="btn sm add-btn">Edit
+                            <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn sm add-btn" (click)="openModal(deleteTemplate,i)"> Delete
+                            <i style="cursor: pointer;margin-top: 0px;" class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<ng-template #deleteTemplate>
+    <div class="modal-body">
+        <p>Are you sure that you want to delete?</p>
+        <div class="text-center">
+            <button class="btns" (click)="cancelButton()">No</button>
+            <button class="btns" (click)="deleteEntry()" [disabled]="loginLoading" [ngClass]="loginLoading?'in-progress':''">Yes
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</ng-template>
